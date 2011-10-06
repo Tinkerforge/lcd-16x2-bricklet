@@ -1,7 +1,3 @@
-// tested with 
-// gcc -lpthread -lrt -o example_hello_world bricklet_lcd_16x2.c 
-//     ip_connection.c example_hello_world.c
-// on Ubuntu
 
 #include <stdio.h>
 
