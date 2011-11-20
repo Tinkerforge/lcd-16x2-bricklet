@@ -240,7 +240,7 @@ void clear_display(uint8_t com, const ClearDisplay *data) {
 	lcd_set_a(0);
 	lcd_set_b(LCD_CLEAR_DISPLAY);
 	lcd_enable();
-	//SLEEP_NS(LCD_TIME_CLEAR_DISPLAY);
+	SLEEP_US(LCD_TIME_US_CLEAR_DISPLAY);
 }
 
 void set_config(uint8_t com, const SetConfig *data) {
