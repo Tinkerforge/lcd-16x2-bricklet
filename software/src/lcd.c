@@ -115,7 +115,7 @@ void destructor(void) {
 }
 
 void tick(uint8_t tick_type) {
-	if(tick_type & TICK_TASK_TYPE_CALCULATION) {
+	if(tick_type & TICK_TASK_TYPE_MESSAGE) {
 		bool pressed[3];
 		pressed[0] = PIN_BUTTON_0.pio->PIO_PDSR & PIN_BUTTON_0.mask;
 		pressed[1] = PIN_BUTTON_1.pio->PIO_PDSR & PIN_BUTTON_1.mask;
