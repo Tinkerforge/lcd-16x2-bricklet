@@ -129,7 +129,7 @@
 void invocation(uint8_t com, uint8_t *data);
 void constructor(void);
 void destructor(void);
-void tick(void);
+void tick(uint8_t tick_type);
 
 void lcd_move_cursor(uint8_t line, uint8_t position);
 void lcd_putchar(char c);

@@ -26,6 +26,7 @@
 #include "bricklib/drivers/adc/adc.h"
 #include "config.h"
 #include "bricklib/utility/util_definitions.h"
+#include "bricklib/utility/init.h"
 
 const ComMessage com_messages[] = {
 	{TYPE_WRITE_LINE, (message_handler_func_t)write_line},
@@ -113,38 +114,40 @@ void destructor(void) {
     BA->PIO_Configure(&PIN_RESET, 1);
 }
 
-void tick(void) {
-	bool pressed[3];
-	pressed[0] = PIN_BUTTON_0.pio->PIO_PDSR & PIN_BUTTON_0.mask;
-	pressed[1] = PIN_BUTTON_1.pio->PIO_PDSR & PIN_BUTTON_1.mask;
-	pressed[2] = PIN_BUTTON_2.pio->PIO_PDSR & PIN_BUTTON_2.mask;
+void tick(uint8_t tick_type) {
+	if(tick_type & TICK_TASK_TYPE_CALCULATION) {
+		bool pressed[3];
+		pressed[0] = PIN_BUTTON_0.pio->PIO_PDSR & PIN_BUTTON_0.mask;
+		pressed[1] = PIN_BUTTON_1.pio->PIO_PDSR & PIN_BUTTON_1.mask;
+		pressed[2] = PIN_BUTTON_2.pio->PIO_PDSR & PIN_BUTTON_2.mask;
 
-	for(uint8_t i = 0; i < NUM_BUTTON; i++) {
-		if(!pressed[i]) {
-			if(BC->button_pressed[i]) {
-				BC->button_pressed[i] = false;
-				ButtonPressedCallback bps = {
-					BS->stack_id,
-					TYPE_BUTTON_PRESSED,
-					sizeof(ButtonPressedCallback),
-					i
-				};
-				BA->send_blocking_with_timeout(&bps,
-											   sizeof(ButtonPressedCallback),
-											   *BA->com_current);
-			}
-		} else {
-			if(!BC->button_pressed[i]) {
-				BC->button_pressed[i] = true;
-				ButtonReleasedCallback brs = {
-					BS->stack_id,
-					TYPE_BUTTON_RELEASED,
-					sizeof(ButtonReleasedCallback),
-					i
-				};
-				BA->send_blocking_with_timeout(&brs,
-											   sizeof(ButtonReleasedCallback),
-											   *BA->com_current);
+		for(uint8_t i = 0; i < NUM_BUTTON; i++) {
+			if(!pressed[i]) {
+				if(BC->button_pressed[i]) {
+					BC->button_pressed[i] = false;
+					ButtonPressedCallback bps = {
+						BS->stack_id,
+						TYPE_BUTTON_PRESSED,
+						sizeof(ButtonPressedCallback),
+						i
+					};
+					BA->send_blocking_with_timeout(&bps,
+												   sizeof(ButtonPressedCallback),
+												   *BA->com_current);
+				}
+			} else {
+				if(!BC->button_pressed[i]) {
+					BC->button_pressed[i] = true;
+					ButtonReleasedCallback brs = {
+						BS->stack_id,
+						TYPE_BUTTON_RELEASED,
+						sizeof(ButtonReleasedCallback),
+						i
+					};
+					BA->send_blocking_with_timeout(&brs,
+												   sizeof(ButtonReleasedCallback),
+												   *BA->com_current);
+				}
 			}
 		}
 	}
