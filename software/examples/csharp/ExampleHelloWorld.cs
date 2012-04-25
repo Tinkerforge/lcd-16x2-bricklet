@@ -10,9 +10,8 @@ class Example
 	{
 		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
 		BrickletLCD16x2 lcd = new BrickletLCD16x2(UID); // Create device object
-		ipcon.AddDevice(lcd); // Add device to ip connection
+		ipcon.AddDevice(lcd); // Add device to IP connection
 		// Don't use device before it is added to a connection
-
 
 		// Turn backlight on
 		lcd.BacklightOn();
@@ -22,5 +21,5 @@ class Example
 
 		System.Console.WriteLine("Press ctrl+c to exit");
 		ipcon.JoinThread();
-    }
+	}
 }

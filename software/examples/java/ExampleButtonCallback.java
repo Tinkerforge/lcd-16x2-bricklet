@@ -11,13 +11,11 @@ public class ExampleButtonCallback {
 	public static void main(String args[]) throws Exception {
 		// Create connection to brickd
 		IPConnection ipcon = new IPConnection(host, port); // Can throw IOException
-
 		BrickletLCD16x2 lcd = new BrickletLCD16x2(UID); // Create device object
 
-		// Add device to ip connection
+		// Add device to IP connection
 		ipcon.addDevice(lcd); // Can throw IPConnection.TimeoutException
 		// Don't use device before it is added to a connection
-		
 
 		// Add and implement listener for pressed and released events
 		lcd.addListener(new BrickletLCD16x2.ButtonPressedListener() {
@@ -30,7 +28,7 @@ public class ExampleButtonCallback {
 				System.out.println("Released: " + button);
 			}
 		});
-		
+
 		System.out.println("Press ctrl+c to exit");
 		ipcon.joinThread();
 	}

@@ -9,10 +9,10 @@ from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_lcd_16x2 import LCD16x2
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create ip connection to brickd
+    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
 
     lcd = LCD16x2(UID) # Create device object
-    ipcon.add_device(lcd) # Add device to ip connection
+    ipcon.add_device(lcd) # Add device to IP connection
     # Don't use device before it is added to a connection
 
     # Turn backlight on

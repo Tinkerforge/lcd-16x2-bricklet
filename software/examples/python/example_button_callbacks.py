@@ -16,10 +16,10 @@ def cb_released(i):
     print('Released: ' + str(i))
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create ip connection to brickd
+    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
 
     lcd = LCD16x2(UID) # Create device object
-    ipcon.add_device(lcd) # Add device to ip connection
+    ipcon.add_device(lcd) # Add device to IP connection
     # Don't use device before it is added to a connection
 
     # Register button status callbacks to cb_pressed and cb_released
