@@ -24,8 +24,8 @@ public class ExampleUnicode {
 			if (codePoint >= 0x0020 && codePoint <= 0x007e) {
 				// The LCD charset doesn't include '\' and '~', use similar characters instead
 				switch (codePoint) {
-				case 0x005c: c = (char)0xa4; break; // REVERSE SOLIDUS is similar to IDEOGRAPHIC COMMA
-				case 0x007e: c = (char)0x2d; break; // TILDE is similar to HYPHEN-MINUS
+				case 0x005c: c = (char)0xa4; break; // REVERSE SOLIDUS maps to IDEOGRAPHIC COMMA
+				case 0x007e: c = (char)0x2d; break; // TILDE maps to HYPHEN-MINUS
 				default: c = (char)codePoint; break;
 				}
 			}
@@ -39,7 +39,7 @@ public class ExampleUnicode {
 				case 0x00a5: c = (char)0x5c; break; // YEN SIGN
 				case 0x2192: c = (char)0x7e; break; // RIGHTWARDS ARROW
 				case 0x2190: c = (char)0x7f; break; // LEFTWARDS ARROW
-				case 0x00b0: c = (char)0xdf; break; // DEGREE SIGN is similar to KATAKANA SEMI-VOICED SOUND MARK
+				case 0x00b0: c = (char)0xdf; break; // DEGREE SIGN maps to KATAKANA SEMI-VOICED SOUND MARK
 				case 0x03b1: c = (char)0xe0; break; // GREEK SMALL LETTER ALPHA
 				case 0x00e4: c = (char)0xe1; break; // LATIN SMALL LETTER A WITH DIAERESIS
 				case 0x00df: c = (char)0xe2; break; // LATIN SMALL LETTER SHARP S
@@ -49,7 +49,7 @@ public class ExampleUnicode {
 				case 0x03c2: c = (char)0xe5; break; // GREEK SMALL LETTER FINAL SIGMA
 				case 0x03c1: c = (char)0xe6; break; // GREEK SMALL LETTER RHO
 				case 0x221a: c = (char)0xe8; break; // SQUARE ROOT
-				case 0x00b9: c = (char)0xe9; break; // SUPERSCRIPT ONE is similar to SUPERSCRIPT (minus) ONE
+				case 0x00b9: c = (char)0xe9; break; // SUPERSCRIPT ONE maps to SUPERSCRIPT (minus) ONE
 				case 0x00a4: c = (char)0xeb; break; // CURRENCY SIGN
 				case 0x00a2: c = (char)0xec; break; // CENT SIGN
 				case 0x2c60: c = (char)0xed; break; // LATIN CAPITAL LETTER L WITH DOUBLE BAR

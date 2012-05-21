@@ -32,8 +32,8 @@ def unicode_to_ks0066u(string):
         if code_point >= 0x0020 and code_point <= 0x007e:
             # The LCD charset doesn't include '\' and '~', use similar characters instead
             mapping = {
-                0x005c : byte(0xa4), # REVERSE SOLIDUS is similar to HALFWIDTH IDEOGRAPHIC COMMA
-                0x007e : byte(0x2d)  # TILDE is similar to HYPHEN-MINUS
+                0x005c : byte(0xa4), # REVERSE SOLIDUS maps to HALFWIDTH IDEOGRAPHIC COMMA
+                0x007e : byte(0x2d)  # TILDE maps to HYPHEN-MINUS
             }
 
             try:
@@ -49,7 +49,7 @@ def unicode_to_ks0066u(string):
                 0x00a5 : byte(0x5c), # YEN SIGN
                 0x2192 : byte(0x7e), # RIGHTWARDS ARROW
                 0x2190 : byte(0x7f), # LEFTWARDS ARROW
-                0x00b0 : byte(0xdf), # DEGREE SIGN is similar to SEMI-VOICED SOUND MARK
+                0x00b0 : byte(0xdf), # DEGREE SIGN maps to SEMI-VOICED SOUND MARK
                 0x03b1 : byte(0xe0), # GREEK SMALL LETTER ALPHA
                 0x00e4 : byte(0xe1), # LATIN SMALL LETTER A WITH DIAERESIS
                 0x00df : byte(0xe2), # LATIN SMALL LETTER SHARP S
@@ -59,7 +59,7 @@ def unicode_to_ks0066u(string):
                 0x03c2 : byte(0xe5), # GREEK SMALL LETTER FINAL SIGMA
                 0x03c1 : byte(0xe6), # GREEK SMALL LETTER RHO
                 0x221a : byte(0xe8), # SQUARE ROOT
-                0x00b9 : byte(0xe9), # SUPERSCRIPT ONE is similar to SUPERSCRIPT (minus) ONE
+                0x00b9 : byte(0xe9), # SUPERSCRIPT ONE maps to SUPERSCRIPT (minus) ONE
                 0x00a4 : byte(0xeb), # CURRENCY SIGN
                 0x00a2 : byte(0xec), # CENT SIGN
                 0x2c60 : byte(0xed), # LATIN CAPITAL LETTER L WITH DOUBLE BAR

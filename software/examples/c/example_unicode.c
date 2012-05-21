@@ -31,8 +31,8 @@ static void wchar_to_ks0066u(const wchar_t *wchar, char *ks0066u, int ks0066u_le
 		if (code_point >= 0x0020 && code_point <= 0x007e) {
 			// The LCD charset doesn't include '\' and '~', use similar characters instead
 			switch (code_point) {
-			case 0x005c: c = 0xa4; break; // REVERSE SOLIDUS is similar to IDEOGRAPHIC COMMA
-			case 0x007e: c = 0x2d; break; // TILDE is similar to HYPHEN-MINUS
+			case 0x005c: c = 0xa4; break; // REVERSE SOLIDUS maps to IDEOGRAPHIC COMMA
+			case 0x007e: c = 0x2d; break; // TILDE maps to HYPHEN-MINUS
 			default: c = code_point; break;
 			}
 		}
@@ -46,7 +46,7 @@ static void wchar_to_ks0066u(const wchar_t *wchar, char *ks0066u, int ks0066u_le
 			case 0x00a5: c = 0x5c; break; // YEN SIGN
 			case 0x2192: c = 0x7e; break; // RIGHTWARDS ARROW
 			case 0x2190: c = 0x7f; break; // LEFTWARDS ARROW
-			case 0x00b0: c = 0xdf; break; // DEGREE SIGN is similar to KATAKANA SEMI-VOICED SOUND MARK
+			case 0x00b0: c = 0xdf; break; // DEGREE SIGN maps to KATAKANA SEMI-VOICED SOUND MARK
 			case 0x03b1: c = 0xe0; break; // GREEK SMALL LETTER ALPHA
 			case 0x00e4: c = 0xe1; break; // LATIN SMALL LETTER A WITH DIAERESIS
 			case 0x00df: c = 0xe2; break; // LATIN SMALL LETTER SHARP S
@@ -56,7 +56,7 @@ static void wchar_to_ks0066u(const wchar_t *wchar, char *ks0066u, int ks0066u_le
 			case 0x03c2: c = 0xe5; break; // GREEK SMALL LETTER FINAL SIGMA
 			case 0x03c1: c = 0xe6; break; // GREEK SMALL LETTER RHO
 			case 0x221a: c = 0xe8; break; // SQUARE ROOT
-			case 0x00b9: c = 0xe9; break; // SUPERSCRIPT ONE is similar to SUPERSCRIPT (minus) ONE
+			case 0x00b9: c = 0xe9; break; // SUPERSCRIPT ONE maps to SUPERSCRIPT (minus) ONE
 			case 0x00a4: c = 0xeb; break; // CURRENCY SIGN
 			case 0x00a2: c = 0xec; break; // CENT SIGN
 			case 0x2c60: c = 0xed; break; // LATIN CAPITAL LETTER L WITH DOUBLE BAR
