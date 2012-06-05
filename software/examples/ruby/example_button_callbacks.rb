@@ -16,10 +16,10 @@ ipcon.add_device lcd # Add device to IP connection
 # Don't use device before it is added to a connection
 
 # Register button status callbacks
-lcd.register_callback BrickletLCD16x2::CALLBACK_BUTTON_PRESSED, do |i|
+lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED) do |i|
   puts "Pressed: #{i}"
 end
-lcd.register_callback BrickletLCD16x2::CALLBACK_BUTTON_RELEASED, do |i|
+lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED) do |i|
   puts "Released: #{i}"
 end
 
