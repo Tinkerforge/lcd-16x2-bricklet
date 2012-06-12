@@ -33,6 +33,7 @@ int main() {
 	// Write "Hello World"
 	lcd_16x2_write_line(&lcd, 0, 0, "Hello World");
 
-	printf("Press ctrl+c to close\n");
-	ipcon_join_thread(&ipcon); // Join mainloop of IP connection
+	printf("Press key to exit\n");
+	getchar();
+	ipcon_destroy(&ipcon);
 }

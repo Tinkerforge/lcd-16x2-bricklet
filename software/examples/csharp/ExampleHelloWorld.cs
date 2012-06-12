@@ -19,7 +19,8 @@ class Example
 		// Write "Hello World"
 		lcd.WriteLine(0, 0, "Hello World");
 
-		System.Console.WriteLine("Press ctrl+c to exit");
-		ipcon.JoinThread();
+		System.Console.WriteLine("Press key to exit");
+		System.Console.ReadKey();
+		ipcon.Destroy();
 	}
 }

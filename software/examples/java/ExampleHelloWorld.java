@@ -23,7 +23,7 @@ public class ExampleHelloWorld {
 		// Write "Hello World"
 		lcd.writeLine((short)0, (short)0, "Hello World");
 
-		System.out.println("Press ctrl+c to exit");
-		ipcon.joinThread();
+		System.console().readLine("Press key to exit\n");
+		ipcon.destroy();
 	}
 }
