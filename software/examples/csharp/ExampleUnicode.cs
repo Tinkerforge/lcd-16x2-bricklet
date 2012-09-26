@@ -42,6 +42,7 @@ class Example
 				case 0x2190: c = (char)0x7f; break; // LEFTWARDS ARROW
 				case 0x00b0: c = (char)0xdf; break; // DEGREE SIGN maps to KATAKANA SEMI-VOICED SOUND MARK
 				case 0x03b1: c = (char)0xe0; break; // GREEK SMALL LETTER ALPHA
+				case 0x00c4: c = (char)0xe1; break; // LATIN CAPITAL LETTER A WITH DIAERESIS
 				case 0x00e4: c = (char)0xe1; break; // LATIN SMALL LETTER A WITH DIAERESIS
 				case 0x00df: c = (char)0xe2; break; // LATIN SMALL LETTER SHARP S
 				case 0x03b5: c = (char)0xe3; break; // GREEK SMALL LETTER EPSILON
@@ -55,10 +56,12 @@ class Example
 				case 0x00a2: c = (char)0xec; break; // CENT SIGN
 				case 0x2c60: c = (char)0xed; break; // LATIN CAPITAL LETTER L WITH DOUBLE BAR
 				case 0x00f1: c = (char)0xee; break; // LATIN SMALL LETTER N WITH TILDE
+				case 0x00d6: c = (char)0xef; break; // LATIN CAPITAL LETTER O WITH DIAERESIS
 				case 0x00f6: c = (char)0xef; break; // LATIN SMALL LETTER O WITH DIAERESIS
 				case 0x03f4: c = (char)0xf2; break; // GREEK CAPITAL THETA SYMBOL
 				case 0x221e: c = (char)0xf3; break; // INFINITY
 				case 0x03a9: c = (char)0xf4; break; // GREEK CAPITAL LETTER OMEGA
+				case 0x00dc: c = (char)0xf5; break; // LATIN CAPITAL LETTER U WITH DIAERESIS
 				case 0x00fc: c = (char)0xf5; break; // LATIN SMALL LETTER U WITH DIAERESIS
 				case 0x03a3: c = (char)0xf6; break; // GREEK CAPITAL LETTER SIGMA
 				case 0x03c0: c = (char)0xf7; break; // GREEK SMALL LETTER PI

@@ -38,6 +38,7 @@ def unicode_to_ks0066u(string)
         0x2190 => 0x7f.chr, # LEFTWARDS ARROW
         0x00b0 => 0xdf.chr, # DEGREE SIGN maps to KATAKANA SEMI-VOICED SOUND MARK
         0x03b1 => 0xe0.chr, # GREEK SMALL LETTER ALPHA
+        0x00c4 => 0xe1.chr, # LATIN CAPITAL LETTER A WITH DIAERESIS
         0x00e4 => 0xe1.chr, # LATIN SMALL LETTER A WITH DIAERESIS
         0x00df => 0xe2.chr, # LATIN SMALL LETTER SHARP S
         0x03b5 => 0xe3.chr, # GREEK SMALL LETTER EPSILON
@@ -51,10 +52,12 @@ def unicode_to_ks0066u(string)
         0x00a2 => 0xec.chr, # CENT SIGN
         0x2c60 => 0xed.chr, # LATIN CAPITAL LETTER L WITH DOUBLE BAR
         0x00f1 => 0xee.chr, # LATIN SMALL LETTER N WITH TILDE
+        0x00d6 => 0xef.chr, # LATIN CAPITAL LETTER O WITH DIAERESIS
         0x00f6 => 0xef.chr, # LATIN SMALL LETTER O WITH DIAERESIS
         0x03f4 => 0xf2.chr, # GREEK CAPITAL THETA SYMBOL
         0x221e => 0xf3.chr, # INFINITY
         0x03a9 => 0xf4.chr, # GREEK CAPITAL LETTER OMEGA
+        0x00dc => 0xf5.chr, # LATIN CAPITAL LETTER U WITH DIAERESIS
         0x00fc => 0xf5.chr, # LATIN SMALL LETTER U WITH DIAERESIS
         0x03a3 => 0xf6.chr, # GREEK CAPITAL LETTER SIGMA
         0x03c0 => 0xf7.chr, # GREEK SMALL LETTER PI
