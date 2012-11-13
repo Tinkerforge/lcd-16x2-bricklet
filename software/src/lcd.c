@@ -1,5 +1,5 @@
 /* lcd-bricklet
- * Copyright (C) 2011 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2011-2012 Olaf Lüke <olaf@tinkerforge.com>
  *
  * lcd.c: Implementation of LCD Bricklet messages
  *
@@ -28,21 +28,52 @@
 #include "bricklib/utility/util_definitions.h"
 #include "bricklib/utility/init.h"
 
-const ComMessage com_messages[] = {
-	{TYPE_WRITE_LINE, (message_handler_func_t)write_line},
-	{TYPE_CLEAR_DISPLAY, (message_handler_func_t)clear_display},
-	{TYPE_BACKLIGHT_ON, (message_handler_func_t)backlight_on},
-	{TYPE_BACKLIGHT_OFF, (message_handler_func_t)backlight_off},
-	{TYPE_IS_BACKLIGHT_ON, (message_handler_func_t)is_backlight_on},
-	{TYPE_SET_CONFIG, (message_handler_func_t)set_config},
-	{TYPE_GET_CONFIG, (message_handler_func_t)get_config},
-	{TYPE_IS_BUTTON_PRESSED, (message_handler_func_t)is_button_pressed},
-};
+void invocation(const ComType com, const uint8_t *data) {
+	switch(((MessageHeader*)data)->fid) {
+		case FID_WRITE_LINE: {
+			write_line(com, (WriteLine*)data);
+			break;
+		}
 
-void invocation(uint8_t com, uint8_t *data) {
-	uint8_t id = ((StandardMessage*)data)->type - 1;
-	if(id < NUM_MESSAGE_TYPES) {
-		BRICKLET_OFFSET(com_messages[id].reply_func)(com, data);
+		case FID_CLEAR_DISPLAY: {
+			clear_display(com, (ClearDisplay*)data);
+			break;
+		}
+
+		case FID_BACKLIGHT_ON: {
+			backlight_on(com, (BacklightOn*)data);
+			break;
+		}
+
+		case FID_BACKLIGHT_OFF: {
+			backlight_off(com, (BacklightOff*)data);
+			break;
+		}
+
+		case FID_IS_BACKLIGHT_ON: {
+			is_backlight_on(com, (IsBacklightOn*)data);
+			break;
+		}
+
+		case FID_SET_CONFIG: {
+			set_config(com, (SetConfig*)data);
+			break;
+		}
+
+		case FID_GET_CONFIG: {
+			get_config(com, (GetConfig*)data);
+			break;
+		}
+
+		case FID_IS_BUTTON_PRESSED: {
+			is_button_pressed(com, (IsButtonPressed*)data);
+			break;
+		}
+
+		default: {
+			BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_NOT_SUPPORTED, com);
+			break;
+		}
 	}
 }
 
@@ -114,7 +145,7 @@ void destructor(void) {
     BA->PIO_Configure(&PIN_RESET, 1);
 }
 
-void tick(uint8_t tick_type) {
+void tick(const uint8_t tick_type) {
 	if(tick_type & TICK_TASK_TYPE_MESSAGE) {
 		bool pressed[3];
 		pressed[0] = PIN_BUTTON_0.pio->PIO_PDSR & PIN_BUTTON_0.mask;
@@ -125,12 +156,10 @@ void tick(uint8_t tick_type) {
 			if(!pressed[i]) {
 				if(BC->button_pressed[i]) {
 					BC->button_pressed[i] = false;
-					ButtonPressedCallback bps = {
-						BS->stack_id,
-						TYPE_BUTTON_PRESSED,
-						sizeof(ButtonPressedCallback),
-						i
-					};
+					ButtonPressedCallback bps;
+					BA->com_make_default_header(&bps, BS->uid, sizeof(ButtonPressedCallback), FID_BUTTON_PRESSED);
+					bps.button = i;
+
 					BA->send_blocking_with_timeout(&bps,
 												   sizeof(ButtonPressedCallback),
 												   *BA->com_current);
@@ -138,12 +167,10 @@ void tick(uint8_t tick_type) {
 			} else {
 				if(!BC->button_pressed[i]) {
 					BC->button_pressed[i] = true;
-					ButtonReleasedCallback brs = {
-						BS->stack_id,
-						TYPE_BUTTON_RELEASED,
-						sizeof(ButtonReleasedCallback),
-						i
-					};
+					ButtonReleasedCallback brs;
+					BA->com_make_default_header(&brs, BS->uid, sizeof(ButtonReleasedCallback), FID_BUTTON_RELEASED);
+					brs.button = i;
+
 					BA->send_blocking_with_timeout(&brs,
 												   sizeof(ButtonReleasedCallback),
 												   *BA->com_current);
@@ -153,12 +180,12 @@ void tick(uint8_t tick_type) {
 	}
 }
 
-void lcd_set_a(uint8_t value) {
+void lcd_set_a(const uint8_t value) {
 	BC->port_a = value | (BC->port_a & LCD_BL);
 	io_write(I2C_INTERNAL_ADDRESS_GPIO_A, BC->port_a);
 }
 
-void lcd_set_b(uint8_t value) {
+void lcd_set_b(const uint8_t value) {
 	BC->port_b = value;
 	io_write(I2C_INTERNAL_ADDRESS_GPIO_B, BC->port_b);
 }
@@ -170,7 +197,7 @@ void lcd_enable(void) {
 }
 
 // TODO: Make twid_write call async
-void io_write(const uint8_t internal_address, uint8_t value) {
+void io_write(const uint8_t internal_address, const uint8_t value) {
 	BA->mutex_take(*BA->mutex_twi_bricklet, MUTEX_BLOCKING);
 	const uint8_t port = BS->port - 'a';
 
@@ -181,35 +208,36 @@ void io_write(const uint8_t internal_address, uint8_t value) {
 		address = I2C_ADDRESS_LOW;
 	}
 
+	uint8_t write_value = value;
 	BA->bricklet_select(port);
     BA->TWID_Write(BA->twid,
                    address,
                    internal_address,
                    I2C_INTERNAL_ADDRESS_BYTES,
-                   &value,
+                   &write_value,
                    I2C_DATA_LENGTH,
                    NULL);
     BA->bricklet_deselect(port);
     BA->mutex_give(*BA->mutex_twi_bricklet);
 }
 
-void lcd_putchar(char c) {
+void lcd_putchar(const char c) {
 	if(!(BC->port_a & LCD_RS)) {
 		lcd_set_a(LCD_RS);
 	}
-	lcd_set_b((uint8_t)c);
+	lcd_set_b((const uint8_t)c);
 	lcd_enable();
 	SLEEP_US(LCD_TIME_US_SET_DATA);
 }
 
-void lcd_putstr(char *c) {
+void lcd_putstr(const char *c) {
 	while(*c != '\0') {
 		lcd_putchar(*c);
 		c++;
 	}
 }
 
-void lcd_move_cursor(uint8_t line, uint8_t position) {
+void lcd_move_cursor(const uint8_t line, const uint8_t position) {
 	uint8_t command = LCD_SET_DDADR + position;;
 	switch(line) {
 		case 0:
@@ -229,7 +257,12 @@ void lcd_move_cursor(uint8_t line, uint8_t position) {
 	SLEEP_US(LCD_TIME_US_SET_MODE);
 }
 
-void write_line(uint8_t com, const WriteLine *data) {
+void write_line(const ComType com, const WriteLine *data) {
+	if(data->line > 1 || data->position > 15) {
+		BA->com_return_error(data, com, MESSAGE_ERROR_CODE_INVALID_PARAMETER, sizeof(MessageHeader));
+		return;
+	}
+
 	lcd_move_cursor(data->line, data->position);
 	for(int8_t i = 0; i < MAX_LENGTH - data->position; i++) {
 		if(data->text[i] == '\0') {
@@ -237,16 +270,20 @@ void write_line(uint8_t com, const WriteLine *data) {
 		}
 		lcd_putchar(data->text[i]);
 	}
+
+	BA->com_return_setter(com, data);
 }
 
-void clear_display(uint8_t com, const ClearDisplay *data) {
+void clear_display(const ComType com, const ClearDisplay *data) {
 	lcd_set_a(0);
 	lcd_set_b(LCD_CLEAR_DISPLAY);
 	lcd_enable();
+
+	BA->com_return_setter(com, data);
 	SLEEP_US(LCD_TIME_US_CLEAR_DISPLAY);
 }
 
-void set_config(uint8_t com, const SetConfig *data) {
+void set_config(const ComType com, const SetConfig *data) {
 	if(data->blinking) {
 		BC->blinking = LCD_BLINKING_ON;
 	} else {
@@ -264,47 +301,50 @@ void set_config(uint8_t com, const SetConfig *data) {
 			  BC->cursor       |
 			  BC->blinking);
 	lcd_enable();
+
+	BA->com_return_setter(com, data);
 }
 
-void get_config(uint8_t com, const GetConfig *data) {
+void get_config(const ComType com, const GetConfig *data) {
 	GetConfigReturn gcr;
 
-	gcr.stack_id      = data->stack_id;
-	gcr.type          = data->type;
-	gcr.length        = sizeof(GetConfigReturn);
+	gcr.header        = data->header;
+	gcr.header.length = sizeof(GetConfigReturn);
 	gcr.blinking      = !!BC->blinking;
 	gcr.cursor        = !!BC->cursor;
 
 	BA->send_blocking_with_timeout(&gcr, sizeof(GetConfigReturn), com);
 }
 
-void backlight_on(uint8_t com, const BacklightOn *data) {
+void backlight_on(const ComType com, const BacklightOn *data) {
 	BC->port_a = BC->port_a | LCD_BL;
 	io_write(I2C_INTERNAL_ADDRESS_GPIO_A, BC->port_a);
+
+	BA->com_return_setter(com, data);
 }
 
-void backlight_off(uint8_t com, const BacklightOff *data) {
+void backlight_off(const ComType com, const BacklightOff *data) {
 	BC->port_a = BC->port_a & (~LCD_BL);
 	io_write(I2C_INTERNAL_ADDRESS_GPIO_A, BC->port_a);
+
+	BA->com_return_setter(com, data);
 }
 
-void is_backlight_on(uint8_t com, const IsBacklightOn *data) {
+void is_backlight_on(const ComType com, const IsBacklightOn *data) {
 	IsBacklightOnReturn ibor;
 
-	ibor.stack_id      = data->stack_id;
-	ibor.type          = data->type;
-	ibor.length        = sizeof(IsBacklightOnReturn);
+	ibor.header        = data->header;
+	ibor.header.length = sizeof(IsBacklightOnReturn);
 	ibor.backlight     = BC->port_a & LCD_BL;
 
 	BA->send_blocking_with_timeout(&ibor, sizeof(IsBacklightOnReturn), com);
 }
 
-void is_button_pressed(uint8_t com, const IsButtonPressed *data) {
+void is_button_pressed(const ComType com, const IsButtonPressed *data) {
 	IsButtonPressedReturn ibpr;
 
-	ibpr.stack_id      = data->stack_id;
-	ibpr.type          = data->type;
-	ibpr.length        = sizeof(IsButtonPressedReturn);
+	ibpr.header        = data->header;
+	ibpr.header.length = sizeof(IsButtonPressedReturn);
 
 	switch(data->button) {
 		case 0:
@@ -317,7 +357,7 @@ void is_button_pressed(uint8_t com, const IsButtonPressed *data) {
 			ibpr.pressed =!(PIN_BUTTON_2.pio->PIO_PDSR & PIN_BUTTON_2.mask);
 			break;
 		default:
-			// TODO: error?
+			BA->com_return_error(data, com, MESSAGE_ERROR_CODE_INVALID_PARAMETER, sizeof(MessageHeader));
 			return;
 	}
 

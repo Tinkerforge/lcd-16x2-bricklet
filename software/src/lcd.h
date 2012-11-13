@@ -1,5 +1,5 @@
 /* lcd-bricklet
- * Copyright (C) 2011 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2011-2012 Olaf Lüke <olaf@tinkerforge.com>
  *
  * lcd.h: Implementation of LCD Bricklet messages
  *
@@ -23,6 +23,8 @@
 #define LCD_H
 
 #include <stdint.h>
+
+#include "bricklib/com/com_common.h"
 
 #define MAX_LENGTH 16
 
@@ -126,135 +128,107 @@
 #define I2C_INTERNAL_ADDRESS_OLAT_A    0x14
 #define I2C_INTERNAL_ADDRESS_OLAT_B    0x15
 
-void invocation(uint8_t com, uint8_t *data);
+void invocation(const ComType com, const uint8_t *data);
 void constructor(void);
 void destructor(void);
-void tick(uint8_t tick_type);
+void tick(const uint8_t tick_type);
 
-void lcd_move_cursor(uint8_t line, uint8_t position);
-void lcd_putchar(char c);
-void lcd_putstr(char *c);
-void lcd_set_a(uint8_t value);
-void lcd_set_b(uint8_t value);
+void lcd_move_cursor(const uint8_t line, const uint8_t position);
+void lcd_putchar(const char c);
+void lcd_putstr(const char *c);
+void lcd_set_a(const uint8_t value);
+void lcd_set_b(const uint8_t value);
 void lcd_enable(void);
-void io_write(const uint8_t internal_address, uint8_t value);
+void io_write(const uint8_t internal_address, const uint8_t value);
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) StandardMessage;
 
-#define TYPE_WRITE_LINE 1
-#define TYPE_CLEAR_DISPLAY 2
-#define TYPE_BACKLIGHT_ON 3
-#define TYPE_BACKLIGHT_OFF 4
-#define TYPE_IS_BACKLIGHT_ON 5
-#define TYPE_SET_CONFIG 6
-#define TYPE_GET_CONFIG 7
-#define TYPE_IS_BUTTON_PRESSED 8
-#define TYPE_BUTTON_PRESSED 9
-#define TYPE_BUTTON_RELEASED 10
+#define FID_WRITE_LINE 1
+#define FID_CLEAR_DISPLAY 2
+#define FID_BACKLIGHT_ON 3
+#define FID_BACKLIGHT_OFF 4
+#define FID_IS_BACKLIGHT_ON 5
+#define FID_SET_CONFIG 6
+#define FID_GET_CONFIG 7
+#define FID_IS_BUTTON_PRESSED 8
+#define FID_BUTTON_PRESSED 9
+#define FID_BUTTON_RELEASED 10
 
 #define NUM_MESSAGE_TYPES 8
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint8_t line;
 	uint8_t position;
 	char text[20];
 } __attribute__((__packed__)) WriteLine;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) ClearDisplay;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	bool cursor;
 	bool blinking;
 } __attribute__((__packed__)) SetConfig;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) GetConfig;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	bool cursor;
 	bool blinking;
 } __attribute__((__packed__)) GetConfigReturn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) BacklightOn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) BacklightOff;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) IsBacklightOn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	bool backlight;
 } __attribute__((__packed__)) IsBacklightOnReturn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint8_t button;
 } __attribute__((__packed__)) IsButtonPressed;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	bool pressed;
 } __attribute__((__packed__)) IsButtonPressedReturn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint8_t button;
 } __attribute__((__packed__)) ButtonPressedCallback;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint8_t button;
 } __attribute__((__packed__)) ButtonReleasedCallback;
 
-void write_line(uint8_t com, const WriteLine *data);
-void clear_display(uint8_t com, const ClearDisplay *data);
-void set_config(uint8_t com, const SetConfig *data);
-void get_config(uint8_t com, const GetConfig *data);
-void backlight_on(uint8_t com, const BacklightOn *data);
-void backlight_off(uint8_t com, const BacklightOff *data);
-void is_backlight_on(uint8_t com, const IsBacklightOn *data);
-void is_button_pressed(uint8_t com, const IsButtonPressed *data);
+void write_line(const ComType com, const WriteLine *data);
+void clear_display(const ComType com, const ClearDisplay *data);
+void set_config(const ComType com, const SetConfig *data);
+void get_config(const ComType com, const GetConfig *data);
+void backlight_on(const ComType com, const BacklightOn *data);
+void backlight_off(const ComType com, const BacklightOff *data);
+void is_backlight_on(const ComType com, const IsBacklightOn *data);
+void is_button_pressed(const ComType com, const IsButtonPressed *data);
 
 #endif
