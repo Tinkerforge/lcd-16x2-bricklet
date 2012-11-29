@@ -10,10 +10,11 @@ HOST = 'localhost'
 PORT = 4223
 UID = '6mJ' # Change to your UID
 
-ipcon = IPConnection.new HOST, PORT # Create IP connection to brickd
-lcd = BrickletLCD16x2.new UID # Create device object
-ipcon.add_device lcd # Add device to IP connection
-# Don't use device before it is added to a connection
+ipcon = IPConnection.new # Create IP connection
+lcd = BrickletLCD16x2.new UID, ipcon # Create device object
+
+ipcon.connect HOST, PORT # Connect to brickd
+# Don't use device before ipcon is connected
 
 # Register button status callbacks
 lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED) do |i|
@@ -25,4 +26,3 @@ end
 
 puts 'Press key to exit'
 $stdin.gets
-ipcon.destroy
