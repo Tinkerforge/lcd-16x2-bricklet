@@ -10,11 +10,11 @@ $host = 'localhost';
 $port = 4223;
 $uid = '6mJ'; // Change to your UID
 
-$ipcon = new IPConnection($host, $port); // Create IP connection to brickd
-$lcd = new BrickletLCD16x2($uid); // Create device object
+$ipcon = new IPConnection(); // Create IP connection
+$lcd = new BrickletLCD16x2($uid, $ipcon); // Create device object
 
-$ipcon->addDevice($lcd); // Add device to IP connection
-// Don't use device before it is added to a connection
+$ipcon->connect($host, $port); // Connect to brickd
+// Don't use device before ipcon is connected
 
 // Turn backlight on
 $lcd->backlightOn();
@@ -24,6 +24,5 @@ $lcd->writeLine(0, 0, 'Hello World');
 
 echo "Press key to exit\n";
 fgetc(fopen('php://stdin', 'r'));
-$ipcon->destroy();
 
 ?>

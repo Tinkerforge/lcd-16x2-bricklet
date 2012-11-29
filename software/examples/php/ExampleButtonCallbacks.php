@@ -21,11 +21,11 @@ function cb_released($i)
     echo "Released: $i\n";
 }
 
-$ipcon = new IPConnection($host, $port); // Create IP connection to brickd
-$lcd = new BrickletLCD16x2($uid); // Create device object
+$ipcon = new IPConnection(); // Create IP connection
+$lcd = new BrickletLCD16x2($uid, $ipcon); // Create device object
 
-$ipcon->addDevice($lcd); // Add device to IP connection
-// Don't use device before it is added to a connection
+$ipcon->connect($host, $port); // Connect to brickd
+// Don't use device before ipcon is connected
 
 // Register button status callbacks to cb_pressed and cb_released
 $lcd->registerCallback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED, 'cb_pressed');
