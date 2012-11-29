@@ -97,11 +97,11 @@ def unicode_to_ks0066u(string):
     return ks0066u
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
+    ipcon = IPConnection() # Create IP connection
+    lcd = LCD16x2(UID, ipcon) # Create device object
 
-    lcd = LCD16x2(UID) # Create device object
-    ipcon.add_device(lcd) # Add device to IP connection
-    # Don't use device before it is added to a connection
+    ipcon.connect(HOST, PORT) # Connect to brickd
+    # Don't use device before ipcon is connected
 
     # Turn backlight on
     lcd.backlight_on()
@@ -113,4 +113,3 @@ if __name__ == "__main__":
     lcd.write_line(1, 0, b'Drehzahl: 1000s\xe9')
 
     input('Press key to exit\n') # Use input() in Python 3
-    ipcon.destroy()

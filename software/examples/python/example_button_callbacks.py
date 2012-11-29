@@ -16,15 +16,14 @@ def cb_released(i):
     print('Released: ' + str(i))
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
+    ipcon = IPConnection() # Create IP connection
+    lcd = LCD16x2(UID, ipcon) # Create device object
 
-    lcd = LCD16x2(UID) # Create device object
-    ipcon.add_device(lcd) # Add device to IP connection
-    # Don't use device before it is added to a connection
+    ipcon.connect(HOST, PORT) # Connect to brickd
+    # Don't use device before ipcon is connected
 
     # Register button status callbacks to cb_pressed and cb_released
     lcd.register_callback(lcd.CALLBACK_BUTTON_PRESSED, cb_pressed)
     lcd.register_callback(lcd.CALLBACK_BUTTON_RELEASED, cb_released)
 
     raw_input('Press key to exit\n') # Use input() in Python 3
-    ipcon.destroy()
