@@ -12,8 +12,8 @@ type
     ipcon: TIPConnection;
     lcd: TBrickletLCD16x2;
   public
-    procedure PressedCB(const i: byte);
-    procedure ReleasedCB(const i: byte);
+    procedure PressedCB(sender: TObject; const i: byte);
+    procedure ReleasedCB(sender: TObject; const i: byte);
     procedure Execute;
   end;
 
@@ -26,27 +26,27 @@ var
   e: TExample;
 
 { Callback functions for button status }
-procedure TExample.PressedCB(const i: byte);
+procedure TExample.PressedCB(sender: TObject; const i: byte);
 begin
   WriteLn(Format('Pressed: %d', [i]));
 end;
 
-procedure TExample.ReleasedCB(const i: byte);
+procedure TExample.ReleasedCB(sender: TObject; const i: byte);
 begin
   WriteLn(Format('Released: %d', [i]));
 end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection to brickd }
-  ipcon := TIPConnection.Create(HOST, PORT);
+  { Create IP connection }
+  ipcon := TIPConnection.Create();
 
   { Create device object }
-  lcd := TBrickletLCD16x2.Create(UID);
+  lcd := TBrickletLCD16x2.Create(UID, ipcon);
 
-  { Add device to IP connection }
-  ipcon.AddDevice(lcd);
-  { Don't use device before it is added to a connection }
+  { Connect to brickd }
+  ipcon.Connect(HOST, PORT);
+  { Don't use device before ipcon is connected }
 
   { Register button status callbacks to procedure PressedCB and ReleasedCB }
   lcd.OnButtonPressed := {$ifdef FPC}@{$endif}PressedCB;
@@ -54,7 +54,6 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy;
 end;
 
 begin
