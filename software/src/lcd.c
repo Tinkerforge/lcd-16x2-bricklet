@@ -259,7 +259,7 @@ void lcd_move_cursor(const uint8_t line, const uint8_t position) {
 
 void write_line(const ComType com, const WriteLine *data) {
 	if(data->line > 1 || data->position > 15) {
-		BA->com_return_error(data, com, MESSAGE_ERROR_CODE_INVALID_PARAMETER, sizeof(MessageHeader));
+		BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
 		return;
 	}
 
@@ -357,7 +357,7 @@ void is_button_pressed(const ComType com, const IsButtonPressed *data) {
 			ibpr.pressed =!(PIN_BUTTON_2.pio->PIO_PDSR & PIN_BUTTON_2.mask);
 			break;
 		default:
-			BA->com_return_error(data, com, MESSAGE_ERROR_CODE_INVALID_PARAMETER, sizeof(MessageHeader));
+			BA->com_return_error(data, sizeof(IsButtonPressedReturn), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
 			return;
 	}
 
