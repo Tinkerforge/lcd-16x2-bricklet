@@ -10,10 +10,14 @@
 
 // Callback functions for button status
 void cb_pressed(uint8_t i, void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	printf("Pressed: %d\n", i);
 }
 
 void cb_released(uint8_t i, void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	printf("Released: %d\n", i);
 }
 
@@ -37,12 +41,12 @@ int main() {
 	lcd_16x2_register_callback(&lcd, 
 	                           LCD_16X2_CALLBACK_BUTTON_PRESSED, 
 	                           cb_pressed,
-							   NULL);
+	                           NULL);
 
 	lcd_16x2_register_callback(&lcd, 
 	                           LCD_16X2_CALLBACK_BUTTON_RELEASED, 
 	                           cb_released,
-							   NULL);
+	                           NULL);
 
 	printf("Press key to exit\n");
 	getchar();
