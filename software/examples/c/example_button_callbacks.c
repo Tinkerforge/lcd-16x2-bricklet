@@ -40,12 +40,12 @@ int main() {
 	// Register button status callbacks to cb_pressed and cb_released
 	lcd_16x2_register_callback(&lcd, 
 	                           LCD_16X2_CALLBACK_BUTTON_PRESSED, 
-	                           cb_pressed,
+	                           (void *)cb_pressed,
 	                           NULL);
 
 	lcd_16x2_register_callback(&lcd, 
 	                           LCD_16X2_CALLBACK_BUTTON_RELEASED, 
-	                           cb_released,
+	                           (void *)cb_released,
 	                           NULL);
 
 	printf("Press key to exit\n");
