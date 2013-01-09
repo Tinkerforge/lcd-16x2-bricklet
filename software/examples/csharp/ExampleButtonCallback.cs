@@ -7,12 +7,12 @@ class Example
 	private static string UID = "ABC"; // Change to your UID
 
 	// Callback functions for button status
-	static void PressedCB(object sender, byte button)
+	static void PressedCB(BrickletLCD16x2 sender, byte button)
 	{
 		System.Console.WriteLine("Pressed: " + button);
 	}
 
-	static void ReleasedCB(object sender, byte button)
+	static void ReleasedCB(BrickletLCD16x2 sender, byte button)
 	{
 		System.Console.WriteLine("Released: " + button);
 	}
