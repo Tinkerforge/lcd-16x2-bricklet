@@ -266,7 +266,7 @@ void write_line(const ComType com, const WriteLine *data) {
 	lcd_move_cursor(data->line, data->position);
 	for(int8_t i = 0; i < MAX_LENGTH - data->position; i++) {
 		if(data->text[i] == '\0') {
-			return;
+			break;
 		}
 		lcd_putchar(data->text[i]);
 	}
