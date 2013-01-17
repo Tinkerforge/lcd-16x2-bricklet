@@ -16,12 +16,12 @@ public class ExampleButtonCallback {
 		// Don't use device before ipcon is connected
 
 		// Add and implement listener for pressed and released events
-		lcd.addListener(new BrickletLCD16x2.ButtonPressedListener() {
+		lcd.addButtonPressedListener(new BrickletLCD16x2.ButtonPressedListener() {
 			public void buttonPressed(short button) {
 				System.out.println("Pressed: " + button);
 			}
 		});
-		lcd.addListener(new BrickletLCD16x2.ButtonReleasedListener() {
+		lcd.addButtonReleasedListener(new BrickletLCD16x2.ButtonReleasedListener() {
 			public void buttonReleased(short button) {
 				System.out.println("Released: " + button);
 			}
