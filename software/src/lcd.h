@@ -155,8 +155,8 @@ typedef struct {
 #define FID_IS_BUTTON_PRESSED 8
 #define FID_BUTTON_PRESSED 9
 #define FID_BUTTON_RELEASED 10
-
-#define NUM_MESSAGE_TYPES 8
+#define FID_SET_CUSTOM_CHARACTER 11
+#define FID_GET_CUSTOM_CHARACTER 12
 
 typedef struct {
 	MessageHeader header;
@@ -222,6 +222,22 @@ typedef struct {
 	uint8_t button;
 } __attribute__((__packed__)) ButtonReleasedCallback;
 
+typedef struct {
+	MessageHeader header;
+	uint8_t index;
+	uint8_t character[8];
+} __attribute__((__packed__)) SetCustomCharacter;
+
+typedef struct {
+	MessageHeader header;
+	uint8_t index;
+} __attribute__((__packed__)) GetCustomCharacter;
+
+typedef struct {
+	MessageHeader header;
+	uint8_t character[8];
+} __attribute__((__packed__)) GetCustomCharacterReturn;
+
 void write_line(const ComType com, const WriteLine *data);
 void clear_display(const ComType com, const ClearDisplay *data);
 void set_config(const ComType com, const SetConfig *data);
@@ -230,5 +246,7 @@ void backlight_on(const ComType com, const BacklightOn *data);
 void backlight_off(const ComType com, const BacklightOff *data);
 void is_backlight_on(const ComType com, const IsBacklightOn *data);
 void is_button_pressed(const ComType com, const IsButtonPressed *data);
+void set_custom_character(const ComType com, const SetCustomCharacter *data);
+void get_custom_character(const ComType com, const GetCustomCharacter *data);
 
 #endif

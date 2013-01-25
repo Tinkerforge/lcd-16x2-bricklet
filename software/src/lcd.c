@@ -70,6 +70,16 @@ void invocation(const ComType com, const uint8_t *data) {
 			break;
 		}
 
+		case FID_SET_CUSTOM_CHARACTER: {
+			set_custom_character(com, (SetCustomCharacter*)data);
+			break;
+		}
+
+		case FID_GET_CUSTOM_CHARACTER: {
+			get_custom_character(com, (GetCustomCharacter*)data);
+			break;
+		}
+
 		default: {
 			BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_NOT_SUPPORTED, com);
 			break;
@@ -85,6 +95,7 @@ void constructor(void) {
 	// Make all pins output
 	io_write(I2C_INTERNAL_ADDRESS_IODIR_A, 0);
 	io_write(I2C_INTERNAL_ADDRESS_IODIR_B, 0);
+	io_write(I2C_INTERNAL_ADDRESS_GPPU_B, 0);
 	lcd_set_a(0);
 	lcd_set_b(0);
 
@@ -221,6 +232,33 @@ void io_write(const uint8_t internal_address, const uint8_t value) {
     BA->mutex_give(*BA->mutex_twi_bricklet);
 }
 
+uint8_t io_read(const uint8_t internal_address) {
+	uint8_t address;
+	if(BS->address == I2C_EEPROM_ADDRESS_HIGH) {
+		address = I2C_ADDRESS_HIGH;
+	} else {
+		address = I2C_ADDRESS_LOW;
+	}
+
+	const uint8_t port = BS->port - 'a';
+	uint8_t value;
+
+	BA->mutex_take(*BA->mutex_twi_bricklet, MUTEX_BLOCKING);
+	BA->bricklet_select(port);
+    BA->TWID_Read(BA->twid,
+                  address,
+                  internal_address,
+                  I2C_INTERNAL_ADDRESS_BYTES,
+                  &value,
+                  I2C_DATA_LENGTH,
+                  NULL);
+	BA->bricklet_deselect(port);
+
+    BA->mutex_give(*BA->mutex_twi_bricklet);
+
+	return value;
+}
+
 void lcd_putchar(const char c) {
 	if(!(BC->port_a & LCD_RS)) {
 		lcd_set_a(LCD_RS);
@@ -268,7 +306,11 @@ void write_line(const ComType com, const WriteLine *data) {
 		if(data->text[i] == '\0') {
 			break;
 		}
-		lcd_putchar(data->text[i]);
+		if(data->text[i] > 7 && data->text[i] < 16) {
+			lcd_putchar(data->text[i] - 8);
+		} else {
+			lcd_putchar(data->text[i]);
+		}
 	}
 
 	BA->com_return_setter(com, data);
@@ -362,4 +404,58 @@ void is_button_pressed(const ComType com, const IsButtonPressed *data) {
 	}
 
 	BA->send_blocking_with_timeout(&ibpr, sizeof(IsButtonPressedReturn), com);
+}
+
+void set_custom_character(const ComType com, const SetCustomCharacter *data) {
+	if(data->index >= 8) {
+		BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
+	}
+
+	lcd_set_b(LCD_SET_CGADR | data->index*8);
+	lcd_set_a(0);
+	lcd_enable();
+	SLEEP_US(LCD_TIME_US_SET_DATA);
+
+	if(!(BC->port_a & LCD_RS)) {
+		lcd_set_a(LCD_RS);
+	}
+
+	for(uint8_t i = 0; i < 8; i++) {
+		lcd_set_b(data->character[i] & 0x1F);
+		lcd_enable();
+		SLEEP_US(LCD_TIME_US_SET_DATA);
+	}
+
+	BA->com_return_setter(com, data);
+}
+
+void get_custom_character(const ComType com, const GetCustomCharacter *data) {
+	if(data->index >= 8) {
+		BA->com_return_error(data, sizeof(GetCustomCharacter), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
+	}
+
+	GetCustomCharacterReturn gccr;
+
+	gccr.header        = data->header;
+	gccr.header.length = sizeof(GetCustomCharacterReturn);
+
+	lcd_set_b(LCD_SET_CGADR | data->index*8);
+	lcd_set_a(0);
+	lcd_enable();
+	SLEEP_US(LCD_TIME_US_SET_DATA);
+
+	io_write(I2C_INTERNAL_ADDRESS_IODIR_B, 0xFF);
+	lcd_set_a(LCD_RS | LCD_RW);
+
+	for(uint8_t i = 0; i < 8; i++) {
+		lcd_set_a(BC->port_a | LCD_EN);
+		SLEEP_US(LCD_TIME_US_SET_DATA);
+		gccr.character[i] = io_read(I2C_INTERNAL_ADDRESS_GPIO_B);
+		lcd_set_a(BC->port_a & (~LCD_EN));
+	}
+
+	lcd_set_a(LCD_RS);
+	io_write(I2C_INTERNAL_ADDRESS_IODIR_B, 0);
+
+	BA->send_blocking_with_timeout(&gccr, sizeof(GetCustomCharacterReturn), com);
 }
