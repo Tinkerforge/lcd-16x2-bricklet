@@ -22,5 +22,6 @@ public class ExampleHelloWorld {
 		lcd.writeLine((short)0, (short)0, "Hello World");
 
 		System.console().readLine("Press key to exit\n");
+		ipcon.disconnect();
 	}
 }

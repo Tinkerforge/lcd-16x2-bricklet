@@ -108,5 +108,6 @@ $lcd->writeLine(1, 0, "Drehzahl: 1000s\xe9");
 
 echo "Press key to exit\n";
 fgetc(fopen('php://stdin', 'r'));
+$ipcon->disconnect();
 
 ?>

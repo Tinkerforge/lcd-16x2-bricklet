@@ -108,5 +108,6 @@ public class ExampleUnicode {
 		lcd.writeLine((short)1, (short)0, "Drehzahl: 1000s\u00e9");
 
 		System.console().readLine("Press key to exit\n");
+		ipcon.disconnect();
 	}
 }

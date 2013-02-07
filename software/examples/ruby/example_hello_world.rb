@@ -24,3 +24,4 @@ lcd.write_line 0, 0, 'Hello World'
 
 puts 'Press key to exit'
 $stdin.gets
+ipcon.disconnect

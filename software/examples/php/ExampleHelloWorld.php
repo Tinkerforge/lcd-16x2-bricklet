@@ -24,5 +24,6 @@ $lcd->writeLine(0, 0, 'Hello World');
 
 echo "Press key to exit\n";
 fgetc(fopen('php://stdin', 'r'));
+$ipcon->disconnect();
 
 ?>

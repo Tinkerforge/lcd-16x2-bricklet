@@ -113,3 +113,4 @@ if __name__ == "__main__":
     lcd.write_line(1, 0, b'Drehzahl: 1000s\xe9')
 
     raw_input('Press key to exit\n') # Use input() in Python 3
+    ipcon.disconnect()
