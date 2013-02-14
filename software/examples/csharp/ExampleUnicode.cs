@@ -8,7 +8,7 @@ class Example
 	private static string UID = "6mJ"; // Change to your UID
 
 	// Maps a normal UTF-16 encoded string to the LCD charset
-	static string Utf16ToKS0066U(string utf16)
+	static string UTF16ToKS0066U(string utf16)
 	{
 		string ks0066u = "";
 		char c;
@@ -101,8 +101,8 @@ class Example
 		// Turn backlight on
 		lcd.BacklightOn();
 
-		// Write a string using the Utf16ToKS0066U function to map to the LCD charset
-		lcd.WriteLine(0, 0, Utf16ToKS0066U("Stromstärke: 5µA"));
+		// Write a string using the UTF16ToKS0066U function to map to the LCD charset
+		lcd.WriteLine(0, 0, UTF16ToKS0066U("Stromstärke: 5µA"));
 
 		// Write a string directly including characters from the LCD charset
 		lcd.WriteLine(1, 0, "Drehzahl: 1000s\xe9");

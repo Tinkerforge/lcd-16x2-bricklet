@@ -11,7 +11,7 @@ $port = 4223;
 $uid = '6mJ'; // Change to your UID
 
 // Maps a string to the LCD charset
-function auto_to_ks0066u($string)
+function autoToKS0066U($string)
 {
 	$ks0066u = '';
 	$utf32le = mb_convert_encoding($string, 'UTF-32LE', 'auto');
@@ -100,8 +100,8 @@ $ipcon->connect($host, $port); // Connect to brickd
 // Turn backlight on
 $lcd->backlightOn();
 
-// Write a string using the Utf16ToKS0066U function to map to the LCD charset
-$lcd->writeLine(0, 0, auto_to_ks0066u("Stromstärke: 5µA"));
+// Write a string using the autoToKS0066U function to map to the LCD charset
+$lcd->writeLine(0, 0, autoToKS0066U("Stromstärke: 5µA"));
 
 // Write a string directly including characters from the LCD charset
 $lcd->writeLine(1, 0, "Drehzahl: 1000s\xe9");
