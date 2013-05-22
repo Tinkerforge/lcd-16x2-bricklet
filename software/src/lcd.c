@@ -409,6 +409,7 @@ void is_button_pressed(const ComType com, const IsButtonPressed *data) {
 void set_custom_character(const ComType com, const SetCustomCharacter *data) {
 	if(data->index >= 8) {
 		BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
+		return;
 	}
 
 	lcd_set_b(LCD_SET_CGADR | data->index*8);
@@ -432,6 +433,7 @@ void set_custom_character(const ComType com, const SetCustomCharacter *data) {
 void get_custom_character(const ComType com, const GetCustomCharacter *data) {
 	if(data->index >= 8) {
 		BA->com_return_error(data, sizeof(GetCustomCharacter), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
+		return;
 	}
 
 	GetCustomCharacterReturn gccr;
