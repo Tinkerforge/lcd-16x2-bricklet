@@ -88,6 +88,8 @@ void invocation(const ComType com, const uint8_t *data) {
 }
 
 void constructor(void) {
+	_Static_assert(sizeof(BrickContext) <= BRICKLET_CONTEXT_MAX_SIZE, "BrickContext too big");
+
 	// Disable Reset
     PIN_RESET.type = PIO_OUTPUT_1;
     BA->PIO_Configure(&PIN_RESET, 1);
