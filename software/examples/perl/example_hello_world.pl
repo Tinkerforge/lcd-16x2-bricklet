@@ -7,8 +7,8 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'jup'; # Change to your UID
 
-$ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
-$lcd = Tinkerforge::BrickletLCD16x2->new(&UID, $ipcon); # Create device object
+my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
+my $lcd = Tinkerforge::BrickletLCD16x2->new(&UID, $ipcon); # Create device object
 
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before $ipcon is connected
