@@ -2,8 +2,8 @@ import com.tinkerforge.BrickletLCD16x2;
 import com.tinkerforge.IPConnection;
 
 public class ExampleHelloWorld {
-	private static final String host = "localhost";
-	private static final int port = 4223;
+	private static final String HOST = "localhost";
+	private static final int PORT = 4223;
 	private static final String UID = "ABC"; // Change to your UID
 	
 	// Note: To make the example code cleaner we do not handle exceptions. Exceptions you
@@ -12,7 +12,7 @@ public class ExampleHelloWorld {
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletLCD16x2 lcd = new BrickletLCD16x2(UID, ipcon); // Create device object
 
-		ipcon.connect(host, port); // Connect to brickd
+		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Turn backlight on

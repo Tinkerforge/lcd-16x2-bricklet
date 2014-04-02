@@ -2,8 +2,8 @@ import com.tinkerforge.BrickletLCD16x2;
 import com.tinkerforge.IPConnection;
 
 public class ExampleUnicode {
-	private static final String host = "localhost";
-	private static final int port = 4223;
+	private static final String HOST = "localhost";
+	private static final int PORT = 4223;
 	private static final String UID = "6mJ"; // Change to your UID
 
 	// Maps a normal UTF-16 encoded string to the LCD charset
@@ -95,7 +95,7 @@ public class ExampleUnicode {
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletLCD16x2 lcd = new BrickletLCD16x2(UID, ipcon); // Create device object
 
-		ipcon.connect(host, port); // Connect to brickd
+		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Turn backlight on
