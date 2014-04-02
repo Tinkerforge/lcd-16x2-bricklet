@@ -12,14 +12,14 @@ sub cb_pressed
 {
     my ($i) = @_;
 
-    print "\nPressed: $i\n";
+    print "Pressed: $i\n";
 }
 
 sub cb_released
 {
     my ($i) = @_;
 
-    print "\nRealeased: $i\n";
+    print "Realeased: $i\n";
 }
 
 my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
@@ -32,6 +32,6 @@ $ipcon->connect(&HOST, &PORT); # Connect to brickd
 $lcd->register_callback($lcd->CALLBACK_BUTTON_PRESSED, 'cb_pressed');
 $lcd->register_callback($lcd->CALLBACK_BUTTON_RELEASED, 'cb_released');
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();
