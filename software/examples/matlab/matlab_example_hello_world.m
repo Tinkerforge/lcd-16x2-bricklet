@@ -1,4 +1,4 @@
-function matlab_example_hello_world
+function matlab_example_hello_world()
     import com.tinkerforge.IPConnection;
     import com.tinkerforge.BrickletLCD16x2;
 
@@ -21,4 +21,3 @@ function matlab_example_hello_world
     input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end
-
