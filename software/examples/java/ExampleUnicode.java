@@ -107,7 +107,7 @@ public class ExampleUnicode {
 		// Write a string directly including characters from the LCD charset
 		lcd.writeLine((short)1, (short)0, "Drehzahl: 1000s\u00e9");
 
-		System.console().readLine("Press key to exit\n");
+		System.out.println("Press key to exit"); System.in.read();
 		ipcon.disconnect();
 	}
 }
