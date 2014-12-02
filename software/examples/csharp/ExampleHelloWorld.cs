@@ -20,8 +20,8 @@ class Example
 		// Write "Hello World"
 		lcd.WriteLine(0, 0, "Hello World");
 
-		System.Console.WriteLine("Press key to exit");
-		System.Console.ReadKey();
+		System.Console.WriteLine("Press enter to exit");
+		System.Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }
