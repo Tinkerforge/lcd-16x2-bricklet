@@ -138,7 +138,7 @@ Module ExampleUnicode
         lcd.WriteLine(1, 0, "Drehzahl: 1000s" + Chr(&He9))
 
         System.Console.WriteLine("Press key to exit")
-        System.Console.ReadKey()
+        System.Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module
