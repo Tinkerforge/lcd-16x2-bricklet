@@ -1,4 +1,4 @@
-update=Fr 12 Aug 2011 14:48:49 CEST
+update=Mi 25 Jan 2012 19:03:27 CET
 version=1
 last_client=pcbnew
 [cvpcb]
@@ -87,12 +87,12 @@ TxtPcbH=600
 TxtModV=600
 TxtModH=600
 TxtModW=120
-VEgarde=100
+VEgarde=0
 DrawLar=150
 EdgeLar=150
 TxtLar=120
 MSegLar=150
-LastNetListRead=lcd-16x2.net
+LastNetListRead=
 [pcbnew/libraries]
 LibDir=kicad-libraries
 LibName1=sockets
