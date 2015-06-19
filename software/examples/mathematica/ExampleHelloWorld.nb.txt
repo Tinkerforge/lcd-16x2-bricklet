@@ -13,7 +13,7 @@ ipcon@Connect[host,port]
 (* Turn backlight on *)
 lcd@BacklightOn[]
 
- (* Write "Hello World" *)
+(* Write "Hello World" *)
 lcd@WriteLine[0,0,"Hello World"]
 
 (* Clean up *)
