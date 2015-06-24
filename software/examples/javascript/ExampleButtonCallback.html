@@ -41,15 +41,13 @@
 
                 lcd.on(Tinkerforge.BrickletLCD16x2.CALLBACK_BUTTON_PRESSED,
                     function(buttonNumber) {
-                        textArea.value += 'Pressed: '+buttonNumber;
-                        textArea.value += '\n';
+                        textArea.value += 'Pressed: '+buttonNumber+'\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
                 lcd.on(Tinkerforge.BrickletLCD16x2.CALLBACK_BUTTON_RELEASED,
                     function(buttonNumber) {
-                        textArea.value += 'Released: '+buttonNumber;
-                        textArea.value += '\n';
+                        textArea.value += 'Released: '+buttonNumber+'\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
