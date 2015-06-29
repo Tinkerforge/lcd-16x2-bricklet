@@ -1,6 +1,6 @@
 function octave_example_button_callbacks()
     more off;
-    
+
     HOST = "localhost";
     PORT = 4223;
     UID = "SCD32"; % Change to your UID
@@ -21,9 +21,17 @@ end
 
 % Callback functions for button status
 function cb_pressed(e)
-    fprintf("Pressed: %s\n", e.button.toString());
+    fprintf("Pressed: %d\n", short2int(e.button));
 end
 
 function cb_released(e)
-    fprintf("Released: %s\n", e.button.toString());
+    fprintf("Released: %d\n", short2int(e.button));
+end
+
+function int = short2int(short)
+    if compare_versions(version(), "3.8", "<=")
+        int = short.intValue();
+    else
+        int = short;
+    end
 end
