@@ -1,4 +1,4 @@
-function matlab_example_button_callbacks()
+function matlab_example_button_callback()
     import com.tinkerforge.IPConnection;
     import com.tinkerforge.BrickletLCD16x2;
 
