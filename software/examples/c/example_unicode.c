@@ -6,7 +6,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "6mJ" // Change to your UID
+#define UID "XYZ" // Change to your UID
 
 // Maps a wchar_t string to the LCD charset
 static void wchar_to_ks0066u(const wchar_t *wchar, char *ks0066u, int ks0066u_length)
@@ -103,8 +103,8 @@ int main() {
 	ipcon_create(&ipcon);
 
 	// Create device object
-	LCD16x2 lcd;
-	lcd_16x2_create(&lcd, UID, &ipcon); 
+	LCD16x2 lcd162;
+	lcd_16x2_create(&lcd162, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -114,16 +114,16 @@ int main() {
 	// Don't use device before ipcon is connected
 
 	// Turn backlight on
-	lcd_16x2_backlight_on(&lcd);
+	lcd_16x2_backlight_on(&lcd162);
 
 	// Write a string using the wchar_to_ks0066u function to map to the LCD charset
 	char ks0066u[16];
 
 	wchar_to_ks0066u(L"Stromstärke: 5µA", ks0066u, sizeof(ks0066u));
-	lcd_16x2_write_line(&lcd, 0, 0, ks0066u);
+	lcd_16x2_write_line(&lcd162, 0, 0, ks0066u);
 
 	// Write a string directly including characters from the LCD charset
-	lcd_16x2_write_line(&lcd, 1, 0, "Drehzahl: 1000s\xe9");
+	lcd_16x2_write_line(&lcd162, 1, 0, "Drehzahl: 1000s\xe9");
 
 	printf("Press key to exit\n");
 	getchar();

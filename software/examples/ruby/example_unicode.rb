@@ -8,7 +8,7 @@ include Tinkerforge
 
 HOST = 'localhost'
 PORT = 4223
-UID = '6mJ' # Change to your UID
+UID = 'XYZ' # Change to your UID
 
 def unicode_to_ks0066u(string)
   ks0066u = ''
@@ -91,19 +91,19 @@ def unicode_to_ks0066u(string)
 end
 
 ipcon = IPConnection.new # Create IP connection
-lcd = BrickletLCD16x2.new UID, ipcon # Create device object
+lcd162 = BrickletLCD16x2.new UID, ipcon # Create device object
 
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
 # Turn backlight on
-lcd.backlight_on
+lcd162.backlight_on
 
 # Write a string using the unicode_to_ks0066u function to map to the LCD charset
-lcd.write_line 0, 0, unicode_to_ks0066u('Stromstärke: 5µA')
+lcd162.write_line 0, 0, unicode_to_ks0066u('Stromstärke: 5µA')
 
 # Write a string directly including characters from the LCD charset
-lcd.write_line 1, 0, "Drehzahl: 1000s\xe9"
+lcd162.write_line 1, 0, "Drehzahl: 1000s\xe9"
 
 puts 'Press key to exit'
 $stdin.gets

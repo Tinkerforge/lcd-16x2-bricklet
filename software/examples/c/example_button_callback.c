@@ -7,17 +7,18 @@
 #define PORT 4223
 #define UID "XYZ" // Change to your UID
 
-// Callback functions for button status
-void cb_pressed(uint8_t i, void *user_data) {
+// Callback function for button pressed callback
+void cb_button_pressed(uint8_t button_pressed, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	printf("Pressed: %d\n", i);
+	printf("Button Pressed: %d\n", button_pressed);
 }
 
-void cb_released(uint8_t i, void *user_data) {
+// Callback function for button released callback
+void cb_button_released(uint8_t button_released, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	printf("Released: %d\n", i);
+	printf("Button Released: %d\n", button_released);
 }
 
 int main() {
@@ -26,8 +27,8 @@ int main() {
 	ipcon_create(&ipcon);
 
 	// Create device object
-	LCD16x2 lcd;
-	lcd_16x2_create(&lcd, UID, &ipcon); 
+	LCD16x2 lcd162;
+	lcd_16x2_create(&lcd162, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -36,15 +37,16 @@ int main() {
 	}
 	// Don't use device before ipcon is connected
 
-	// Register button status callbacks to cb_pressed and cb_released
-	lcd_16x2_register_callback(&lcd, 
-	                           LCD_16X2_CALLBACK_BUTTON_PRESSED, 
-	                           (void *)cb_pressed,
+	// Register button pressed callback to function cb_button_pressed
+	lcd_16x2_register_callback(&lcd162,
+	                           LCD_16X2_CALLBACK_BUTTON_PRESSED,
+	                           (void *)cb_button_pressed,
 	                           NULL);
 
-	lcd_16x2_register_callback(&lcd, 
-	                           LCD_16X2_CALLBACK_BUTTON_RELEASED, 
-	                           (void *)cb_released,
+	// Register button released callback to function cb_button_released
+	lcd_16x2_register_callback(&lcd162,
+	                           LCD_16X2_CALLBACK_BUTTON_RELEASED,
+	                           (void *)cb_button_released,
 	                           NULL);
 
 	printf("Press key to exit\n");

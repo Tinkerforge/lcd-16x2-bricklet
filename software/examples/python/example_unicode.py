@@ -3,7 +3,7 @@
 
 HOST = "localhost"
 PORT = 4223
-UID = "6mJ" # Change to your UID
+UID = "XYZ" # Change to your UID
 
 import sys
 import types
@@ -98,19 +98,19 @@ def unicode_to_ks0066u(string):
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
-    lcd = LCD16x2(UID, ipcon) # Create device object
+    lcd162 = LCD16x2(UID, ipcon) # Create device object
 
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
 
     # Turn backlight on
-    lcd.backlight_on()
+    lcd162.backlight_on()
 
     # Write a string using the unicode_to_ks0066u function to map to the LCD charset
-    lcd.write_line(0, 0, unicode_to_ks0066u('Stromstärke: 5µA'))
+    lcd162.write_line(0, 0, unicode_to_ks0066u('Stromstärke: 5µA'))
 
     # Write a string directly including characters from the LCD charset
-    lcd.write_line(1, 0, b'Drehzahl: 1000s\xe9')
+    lcd162.write_line(1, 0, b'Drehzahl: 1000s\xe9')
 
     raw_input('Press key to exit\n') # Use input() in Python 3
     ipcon.disconnect()

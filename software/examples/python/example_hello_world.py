@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-  
+# -*- coding: utf-8 -*-
 
 HOST = "localhost"
 PORT = 4223
@@ -10,16 +10,16 @@ from tinkerforge.bricklet_lcd_16x2 import LCD16x2
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
-    lcd = LCD16x2(UID, ipcon) # Create device object
+    lcd162 = LCD16x2(UID, ipcon) # Create device object
 
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
 
     # Turn backlight on
-    lcd.backlight_on()
+    lcd162.backlight_on()
 
     # Write "Hello World"
-    lcd.write_line(0, 0, 'Hello World')
+    lcd162.write_line(0, 0, 'Hello World')
 
     raw_input('Press key to exit\n') # Use input() in Python 3
     ipcon.disconnect()

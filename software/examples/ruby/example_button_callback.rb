@@ -8,20 +8,22 @@ include Tinkerforge
 
 HOST = 'localhost'
 PORT = 4223
-UID = '6mJ' # Change to your UID
+UID = 'XYZ' # Change to your UID
 
 ipcon = IPConnection.new # Create IP connection
-lcd = BrickletLCD16x2.new UID, ipcon # Create device object
+lcd162 = BrickletLCD16x2.new UID, ipcon # Create device object
 
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Register button status callbacks
-lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED) do |i|
-  puts "Pressed: #{i}"
+# Register button pressed callback
+lcd162.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED) do |button_pressed|
+  puts "Button Pressed: #{button_pressed}"
 end
-lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED) do |i|
-  puts "Released: #{i}"
+
+# Register button released callback
+lcd162.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED) do |button_released|
+  puts "Button Released: #{button_released}"
 end
 
 puts 'Press key to exit'
