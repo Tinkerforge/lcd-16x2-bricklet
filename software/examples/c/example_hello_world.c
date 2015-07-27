@@ -13,8 +13,8 @@ int main() {
 	ipcon_create(&ipcon);
 
 	// Create device object
-	LCD16x2 lcd162;
-	lcd_16x2_create(&lcd162, UID, &ipcon);
+	LCD16x2 lcd;
+	lcd_16x2_create(&lcd, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -24,10 +24,10 @@ int main() {
 	// Don't use device before ipcon is connected
 
 	// Turn backlight on
-	lcd_16x2_backlight_on(&lcd162);
+	lcd_16x2_backlight_on(&lcd);
 
 	// Write "Hello World"
-	lcd_16x2_write_line(&lcd162, 0, 0, "Hello World");
+	lcd_16x2_write_line(&lcd, 0, 0, "Hello World");
 
 	printf("Press key to exit\n");
 	getchar();

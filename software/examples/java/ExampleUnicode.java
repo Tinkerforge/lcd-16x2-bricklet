@@ -93,19 +93,19 @@ public class ExampleUnicode {
 	//       might normally want to catch are described in the documentation
 	public static void main(String args[]) throws Exception {
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletLCD16x2 lcd162 = new BrickletLCD16x2(UID, ipcon); // Create device object
+		BrickletLCD16x2 lcd = new BrickletLCD16x2(UID, ipcon); // Create device object
 
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Turn backlight on
-		lcd162.backlightOn();
+		lcd.backlightOn();
 
 		// Write a string using the utf16ToKS0066U function to map to the LCD charset
-		lcd162.writeLine((short)0, (short)0, utf16ToKS0066U("Stromstärke: 5µA"));
+		lcd.writeLine((short)0, (short)0, utf16ToKS0066U("Stromstärke: 5µA"));
 
 		// Write a string directly including characters from the LCD charset
-		lcd162.writeLine((short)1, (short)0, "Drehzahl: 1000s\u00e9");
+		lcd.writeLine((short)1, (short)0, "Drehzahl: 1000s\u00e9");
 
 		System.out.println("Press key to exit"); System.in.read();
 		ipcon.disconnect();

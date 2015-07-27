@@ -27,8 +27,8 @@ int main() {
 	ipcon_create(&ipcon);
 
 	// Create device object
-	LCD16x2 lcd162;
-	lcd_16x2_create(&lcd162, UID, &ipcon);
+	LCD16x2 lcd;
+	lcd_16x2_create(&lcd, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -38,13 +38,13 @@ int main() {
 	// Don't use device before ipcon is connected
 
 	// Register button pressed callback to function cb_button_pressed
-	lcd_16x2_register_callback(&lcd162,
+	lcd_16x2_register_callback(&lcd,
 	                           LCD_16X2_CALLBACK_BUTTON_PRESSED,
 	                           (void *)cb_button_pressed,
 	                           NULL);
 
 	// Register button released callback to function cb_button_released
-	lcd_16x2_register_callback(&lcd162,
+	lcd_16x2_register_callback(&lcd,
 	                           LCD_16X2_CALLBACK_BUTTON_RELEASED,
 	                           (void *)cb_button_released,
 	                           NULL);

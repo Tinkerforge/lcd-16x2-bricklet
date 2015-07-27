@@ -114,16 +114,16 @@ int main() {
 	// Don't use device before ipcon is connected
 
 	// Turn backlight on
-	lcd_16x2_backlight_on(&lcd162);
+	lcd_16x2_backlight_on(&lcd);
 
 	// Write a string using the wchar_to_ks0066u function to map to the LCD charset
 	char ks0066u[16];
 
 	wchar_to_ks0066u(L"Stromstärke: 5µA", ks0066u, sizeof(ks0066u));
-	lcd_16x2_write_line(&lcd162, 0, 0, ks0066u);
+	lcd_16x2_write_line(&lcd, 0, 0, ks0066u);
 
 	// Write a string directly including characters from the LCD charset
-	lcd_16x2_write_line(&lcd162, 1, 0, "Drehzahl: 1000s\xe9");
+	lcd_16x2_write_line(&lcd, 1, 0, "Drehzahl: 1000s\xe9");
 
 	printf("Press key to exit\n");
 	getchar();

@@ -21,16 +21,16 @@ class Example
 	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletLCD16x2 lcd162 = new BrickletLCD16x2(UID, ipcon); // Create device object
+		BrickletLCD16x2 lcd = new BrickletLCD16x2(UID, ipcon); // Create device object
 
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Register button pressed callback to function ButtonPressedCB
-		lcd162.ButtonPressed += ButtonPressedCB;
+		lcd.ButtonPressed += ButtonPressedCB;
 
 		// Register button released callback to function ButtonReleasedCB
-		lcd162.ButtonReleased += ButtonReleasedCB;
+		lcd.ButtonReleased += ButtonReleasedCB;
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();
