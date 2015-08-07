@@ -6,11 +6,11 @@ PORT = 4223
 UID = "XYZ" # Change to your UID
 
 from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_lcd_16x2 import LCD16x2
+from tinkerforge.bricklet_lcd_16x2 import BrickletLCD16x2
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
-    lcd = LCD16x2(UID, ipcon) # Create device object
+    lcd = BrickletLCD16x2(UID, ipcon) # Create device object
 
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
