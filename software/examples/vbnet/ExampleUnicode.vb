@@ -3,7 +3,7 @@ Imports Tinkerforge
 Module ExampleUnicode
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "6ko" ' Change to your UID
+    Const UID As String = "XYZ" ' Change to your UID
 
     ' Maps a normal UTF-16 encoded string to the LCD charset
     Function UTF16ToKS0066U(ByVal utf16 As String) As String
