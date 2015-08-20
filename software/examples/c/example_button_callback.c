@@ -8,17 +8,17 @@
 #define UID "XYZ" // Change to your UID
 
 // Callback function for button pressed callback
-void cb_button_pressed(uint8_t button_pressed, void *user_data) {
+void cb_button_pressed(uint8_t button, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	printf("Button Pressed: %d\n", button_pressed);
+	printf("Button Pressed: %d\n", button);
 }
 
 // Callback function for button released callback
-void cb_button_released(uint8_t button_released, void *user_data) {
+void cb_button_released(uint8_t button, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	printf("Button Released: %d\n", button_released);
+	printf("Button Released: %d\n", button);
 }
 
 int main(void) {
