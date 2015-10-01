@@ -19,6 +19,6 @@ $lcd->backlight_on();
 # Write "Hello World"
 $lcd->write_line(0, 0, "Hello World");
 
-print "Press any key to exit...\n";
+print "Press key to exit\n";
 <STDIN>;
 $ipcon->disconnect();

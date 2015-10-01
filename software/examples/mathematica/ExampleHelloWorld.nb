@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[      4572,        108]
-NotebookOptionsPosition[      4146,         87]
-NotebookOutlinePosition[      4478,        102]
-CellTagsIndexPosition[      4435,         99]
+NotebookDataLength[      4485,        111]
+NotebookOptionsPosition[      4059,         90]
+NotebookOutlinePosition[      4391,        105]
+CellTagsIndexPosition[      4348,        102]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -25,44 +25,46 @@ Cell[BoxData[{
    3.600608117803465*^9}, 3.600685373189396*^9}],
 
 Cell[BoxData[{
- RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
- RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\n", 
+ RowBox[{"port", "=", "4223"}], "\n", 
  RowBox[{
-  RowBox[{"uid", "=", "\"\<SCD32\>\""}], 
-  RowBox[{"(*", " ", 
-   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+  RowBox[{"uid", "=", "\"\<XYZ\>\""}], 
+  RowBox[{"(*", 
+   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], "*)"}], "\n", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{
    "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
-   " ", "*)"}]}], "\[IndentingNewLine]", 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"ipcon", "=", 
   RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
  RowBox[{"lcd", "=", 
   RowBox[{"NETNew", "[", 
-   RowBox[{"\"\<Tinkerforge.BrickletLCD16x4\>\"", ",", "uid", ",", "ipcon"}], 
-   "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"\"\<Tinkerforge.BrickletLCD16x2\>\"", ",", "uid", ",", "ipcon"}], 
+   "]"}]}], "\n", 
  RowBox[{
   RowBox[{"ipcon", "@", 
    RowBox[{"Connect", "[", 
-    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\n", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Turn", " ", "backlight", " ", "on"}], " ", "*)"}]}], "\n", 
+    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Turn", " ", "backlight", " ", "on"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"lcd", "@", 
-   RowBox[{"BacklightOn", "[", "]"}]}], "\[IndentingNewLine]", "\n", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Write", " ", "\"\<Hello World\>\""}], " ", "*)"}]}], "\n", 
+   RowBox[{"BacklightOn", "[", "]"}]}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Write", " ", "\"\<Hello World\>\""}], 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"lcd", "@", 
    RowBox[{"WriteLine", "[", 
-    RowBox[{"0", ",", "0", ",", "\"\<Hello World\>\""}], "]"}]}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+    RowBox[{"0", ",", "0", ",", "\"\<Hello World\>\""}], "]"}]}], "\n", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Clean", " ", "up"}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"ipcon", "@", 
-  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"ReleaseNETObject", "[", "lcd", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"Disconnect", "[", "]"}]}], "\n", 
+ RowBox[{"ReleaseNETObject", "[", "lcd", "]"}], "\n", 
  RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
  CellChangeTimes->{{3.600075175574196*^9, 3.600075177574486*^9}, {
    3.600075518821967*^9, 3.60007554243471*^9}, {3.600075580562348*^9, 
@@ -83,10 +85,11 @@ Cell[BoxData[{
    3.6006080340220013`*^9}, {3.600608128817329*^9, 3.600608130481505*^9}, {
    3.60060817038931*^9, 3.600608171010838*^9}, {3.60060891170606*^9, 
    3.600608950204666*^9}, {3.6007556261232843`*^9, 3.600755697415724*^9}, {
-   3.6007576156862383`*^9, 3.600757615714332*^9}, 3.643709731276819*^9}]
+   3.6007576156862383`*^9, 3.600757615714332*^9}, 3.643709731276819*^9, 
+   3.65267586410858*^9}]
 },
 WindowSize->{1521, 867},
-WindowMargins->{{333, 64}, {53, Automatic}},
+WindowMargins->{{332, 65}, {52, Automatic}},
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
@@ -102,7 +105,7 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[400, 13, 602, 11, 55, "Input"],
-Cell[1005, 26, 3137, 59, 429, "Input"]
+Cell[1005, 26, 3050, 62, 429, "Input"]
 }
 ]
 *)

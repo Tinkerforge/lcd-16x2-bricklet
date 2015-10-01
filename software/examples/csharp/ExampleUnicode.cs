@@ -107,8 +107,8 @@ class Example
 		// Write a string directly including characters from the LCD charset
 		lcd.WriteLine(1, 0, "Drehzahl: 1000s\xe9");
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

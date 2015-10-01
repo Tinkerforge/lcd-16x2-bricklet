@@ -8,17 +8,18 @@ use Tinkerforge\BrickletLCD16x2;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = '6mJ'; // Change to your UID
+const UID = 'XYZ'; // Change to your UID
 
-// Callback functions for button status
-function cb_pressed($i)
+// Callback function for button pressed callback
+function cb_buttonPressed($button)
 {
-    echo "Pressed: $i\n";
+    echo "Button Pressed: $button\n";
 }
 
-function cb_released($i)
+// Callback function for button released callback
+function cb_buttonReleased($button)
 {
-    echo "Released: $i\n";
+    echo "Button Released: $button\n";
 }
 
 $ipcon = new IPConnection(); // Create IP connection
@@ -27,9 +28,11 @@ $lcd = new BrickletLCD16x2(UID, $ipcon); // Create device object
 $ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
-// Register button status callbacks to cb_pressed and cb_released
-$lcd->registerCallback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED, 'cb_pressed');
-$lcd->registerCallback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED, 'cb_released');
+// Register button pressed callback to function cb_buttonPressed
+$lcd->registerCallback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED, 'cb_buttonPressed');
+
+// Register button released callback to function cb_buttonReleased
+$lcd->registerCallback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED, 'cb_buttonReleased');
 
 echo "Press ctrl+c to exit\n";
 $ipcon->dispatchCallbacks(-1); // Dispatch callbacks forever

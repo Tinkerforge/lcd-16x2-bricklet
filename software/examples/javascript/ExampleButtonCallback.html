@@ -6,7 +6,7 @@
     </head>
     <body>
         <div style="text-align:center;">
-            <h1>LCD 16x2 Bricklet Callback Example</h1>
+            <h1>LCD 16x2 Bricklet Button Callback Example</h1>
             <p>
                 <input value="localhost" id="host" type="text" size="20">:
                 <input value="4280" id="port" type="text" size="5">,
@@ -34,20 +34,25 @@
                 var lcd = new Tinkerforge.BrickletLCD16x2(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
-                // Register button status callbacks
+                // Don't use device before ipcon is connected
 
+                // Register button pressed callback
                 lcd.on(Tinkerforge.BrickletLCD16x2.CALLBACK_BUTTON_PRESSED,
-                    function(buttonNumber) {
-                        textArea.value += 'Pressed: '+buttonNumber+'\n';
+                    // Callback function for button pressed callback
+                    function (button) {
+                        textArea.value += 'Button Pressed: ' + button + '\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
+
+                // Register button released callback
                 lcd.on(Tinkerforge.BrickletLCD16x2.CALLBACK_BUTTON_RELEASED,
-                    function(buttonNumber) {
-                        textArea.value += 'Released: '+buttonNumber+'\n';
+                    // Callback function for button released callback
+                    function (button) {
+                        textArea.value += 'Button Released: ' + button + '\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

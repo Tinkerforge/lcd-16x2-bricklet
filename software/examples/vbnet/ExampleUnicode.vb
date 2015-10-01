@@ -1,3 +1,4 @@
+Imports System
 Imports Tinkerforge
 
 Module ExampleUnicode
@@ -137,8 +138,8 @@ Module ExampleUnicode
         ' Write a string directly including characters from the LCD charset
         lcd.WriteLine(1, 0, "Drehzahl: 1000s" + Chr(&He9))
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module

@@ -17,13 +17,13 @@ ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
 # Register button pressed callback
-lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED) do |button_pressed|
-  puts "Button Pressed: #{button_pressed}"
+lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_PRESSED) do |button|
+  puts "Button Pressed: #{button}"
 end
 
 # Register button released callback
-lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED) do |button_released|
-  puts "Button Released: #{button_released}"
+lcd.register_callback(BrickletLCD16x2::CALLBACK_BUTTON_RELEASED) do |button|
+  puts "Button Released: #{button}"
 end
 
 puts 'Press key to exit'

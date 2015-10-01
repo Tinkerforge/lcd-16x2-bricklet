@@ -1,3 +1,4 @@
+Imports System
 Imports Tinkerforge
 
 Module ExampleButtonCallback
@@ -5,14 +6,14 @@ Module ExampleButtonCallback
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback function for button pressed callback
-    Sub ButtonPressedCB(ByVal sender As BrickletLCD16x2, ByVal buttonPressed As Byte)
-        System.Console.WriteLine("Button Pressed: " + buttonPressed.ToString())
+    ' Callback subroutine for button pressed callback
+    Sub ButtonPressedCB(ByVal sender As BrickletLCD16x2, ByVal button As Byte)
+        Console.WriteLine("Button Pressed: " + button.ToString())
     End Sub
 
-    ' Callback function for button released callback
-    Sub ButtonReleasedCB(ByVal sender As BrickletLCD16x2, ByVal buttonReleased As Byte)
-        System.Console.WriteLine("Button Released: " + buttonReleased.ToString())
+    ' Callback subroutine for button released callback
+    Sub ButtonReleasedCB(ByVal sender As BrickletLCD16x2, ByVal button As Byte)
+        Console.WriteLine("Button Released: " + button.ToString())
     End Sub
 
     Sub Main()
@@ -22,14 +23,14 @@ Module ExampleButtonCallback
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Register button pressed callback to function ButtonPressedCB
+        ' Register button pressed callback to subroutine ButtonPressedCB
         AddHandler lcd.ButtonPressed, AddressOf ButtonPressedCB
 
-        ' Register button released callback to function ButtonReleasedCB
+        ' Register button released callback to subroutine ButtonReleasedCB
         AddHandler lcd.ButtonReleased, AddressOf ButtonReleasedCB
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module

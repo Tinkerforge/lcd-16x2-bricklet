@@ -8,7 +8,7 @@ use Tinkerforge\BrickletLCD16x2;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = '6mJ'; // Change to your UID
+const UID = 'XYZ'; // Change to your UID
 
 // Maps a string to the LCD charset
 function autoToKS0066U($string)

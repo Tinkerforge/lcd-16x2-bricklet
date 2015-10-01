@@ -3,20 +3,20 @@ LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
 
 host="localhost"
 port=4223
-uid="SCD32"(* Change to your UID *)
+uid="XYZ"(*Change to your UID*)
 
-(* Create IPConnection and device object *)
+(*Create IPConnection and device object*)
 ipcon=NETNew["Tinkerforge.IPConnection"]
-lcd=NETNew["Tinkerforge.BrickletLCD16x4",uid,ipcon]
+lcd=NETNew["Tinkerforge.BrickletLCD16x2",uid,ipcon]
 ipcon@Connect[host,port]
 
-(* Turn backlight on *)
+(*Turn backlight on*)
 lcd@BacklightOn[]
 
-(* Write "Hello World" *)
+(*Write "Hello World"*)
 lcd@WriteLine[0,0,"Hello World"]
 
-(* Clean up *)
+(*Clean up*)
 ipcon@Disconnect[]
 ReleaseNETObject[lcd]
 ReleaseNETObject[ipcon]

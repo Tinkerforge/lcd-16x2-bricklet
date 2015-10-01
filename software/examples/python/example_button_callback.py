@@ -9,12 +9,12 @@ from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_lcd_16x2 import BrickletLCD16x2
 
 # Callback function for button pressed callback
-def cb_button_pressed(button_pressed):
-    print('Button Pressed: ' + str(button_pressed))
+def cb_button_pressed(button):
+    print("Button Pressed: " + str(button))
 
 # Callback function for button released callback
-def cb_button_released(button_released):
-    print('Button Released: ' + str(button_released))
+def cb_button_released(button):
+    print("Button Released: " + str(button))
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
@@ -29,5 +29,5 @@ if __name__ == "__main__":
     # Register button released callback to function cb_button_released
     lcd.register_callback(lcd.CALLBACK_BUTTON_RELEASED, cb_button_released)
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

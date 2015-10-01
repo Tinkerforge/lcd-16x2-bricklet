@@ -4,26 +4,30 @@ function matlab_example_button_callback()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'SCD32'; % Change to your UID
-    
+    UID = 'XYZ'; % Change to your UID
+
     ipcon = IPConnection(); % Create IP connection
     lcd = BrickletLCD16x2(UID, ipcon); % Create device object
 
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
-    % Register button status callbacks to cb_pressed and cb_released
-    set(lcd, 'ButtonPressedCallback', @(h, e) cb_pressed(e));
-    set(lcd, 'ButtonReleasedCallback', @(h, e) cb_released(e));
+    % Register button pressed callback to function cb_button_pressed
+    set(lcd, 'ButtonPressedCallback', @(h, e) cb_button_pressed(e));
 
-    input('Press any key to exit...\n', 's');
+    % Register button released callback to function cb_button_released
+    set(lcd, 'ButtonReleasedCallback', @(h, e) cb_button_released(e));
+
+    input('Press key to exit\n', 's');
     ipcon.disconnect();
 end
 
-% Callback functions for button status
-function cb_pressed(e)
-    fprintf('Pressed: %i\n', e.button);
+% Callback function for button pressed callback
+function cb_button_pressed(e)
+    fprintf('Button Pressed: %i\n', e.button);
 end
-function cb_released(e)
-    fprintf('Released: %i\n', e.button);
+
+% Callback function for button released callback
+function cb_button_released(e)
+    fprintf('Button Released: %i\n', e.button);
 end

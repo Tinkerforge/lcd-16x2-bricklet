@@ -120,8 +120,8 @@ begin
   lcd.BacklightOn;
 
   { Write a string using the WideStringToKS0066U function to map to the LCD charset }
-  { NOTE: For the Free Pascal Compiler (and Lazarus) UTF8Decode is used to create a WideString.
-          It assumes that your source file is UTF-8 encoded }
+  { Note: For the Free Pascal Compiler (and Lazarus) UTF8Decode is used to create a
+          WideString. It assumes that your source file is UTF-8 encoded }
   lcd.WriteLine(0, 0, WideStringToKS0066U({$ifdef FPC}UTF8Decode{$endif}('Stromstärke: 5µA')));
 
   { Write a string directly including characters from the LCD charset }

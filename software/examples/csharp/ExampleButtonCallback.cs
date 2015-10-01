@@ -1,3 +1,4 @@
+using System;
 using Tinkerforge;
 
 class Example
@@ -7,15 +8,15 @@ class Example
 	private static string UID = "XYZ"; // Change to your UID
 
 	// Callback function for button pressed callback
-	static void ButtonPressedCB(BrickletLCD16x2 sender, byte buttonPressed)
+	static void ButtonPressedCB(BrickletLCD16x2 sender, byte button)
 	{
-		System.Console.WriteLine("Button Pressed: " + buttonPressed);
+		Console.WriteLine("Button Pressed: " + button);
 	}
 
 	// Callback function for button released callback
-	static void ButtonReleasedCB(BrickletLCD16x2 sender, byte buttonReleased)
+	static void ButtonReleasedCB(BrickletLCD16x2 sender, byte button)
 	{
-		System.Console.WriteLine("Button Released: " + buttonReleased);
+		Console.WriteLine("Button Released: " + button);
 	}
 
 	static void Main()
@@ -32,8 +33,8 @@ class Example
 		// Register button released callback to function ButtonReleasedCB
 		lcd.ButtonReleased += ButtonReleasedCB;
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

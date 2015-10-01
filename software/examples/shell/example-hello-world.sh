@@ -1,11 +1,10 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
-# turn backlight on
+# Turn backlight on
 tinkerforge call lcd-16x2-bricklet $uid backlight-on
 
-# write "Hello World"
+# Write "Hello World"
 tinkerforge call lcd-16x2-bricklet $uid write-line 0 0 "Hello World"

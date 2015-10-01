@@ -19,7 +19,7 @@ if __name__ == "__main__":
     lcd.backlight_on()
 
     # Write "Hello World"
-    lcd.write_line(0, 0, 'Hello World')
+    lcd.write_line(0, 0, "Hello World")
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()
