@@ -7,7 +7,7 @@ function matlab_example_hello_world()
     UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
-    lcd = BrickletLCD16x2(UID, ipcon); % Create device object
+    lcd = handle(BrickletLCD16x2(UID, ipcon), 'CallbackProperties'); % Create device object
 
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
