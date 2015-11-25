@@ -1,11 +1,11 @@
-1.0.0:
+2011-11-20: 1.0.0 (8f4f917)
 - Initial version
 
-1.1.0:
+2012-02-15: 1.1.0 (ad99c05)
 - Add support for tick types
 
-2.0.0:
+2013-01-21: 2.0.0 (b784fa1)
 - Support for Protocol 2.0
 
-2.0.1:
+2013-01-25: 2.0.1 (549002b)
 - Add support for custom characters
