@@ -4,7 +4,9 @@ import com.tinkerforge.BrickletLCD16x2;
 public class ExampleUnicode {
 	private static final String HOST = "localhost";
 	private static final int PORT = 4223;
-	private static final String UID = "XYZ"; // Change to your UID
+
+	// Change XYZ to the UID of your LCD 16x2 Bricklet
+	private static final String UID = "XYZ";
 
 	// Maps a normal UTF-16 encoded string to the LCD charset
 	static String utf16ToKS0066U(String utf16)

@@ -3,7 +3,7 @@ function octave_example_button_callback()
 
     HOST = "localhost";
     PORT = 4223;
-    UID = "XYZ"; % Change to your UID
+    UID = "XYZ"; % Change XYZ to the UID of your LCD 16x2 Bricklet
 
     ipcon = java_new("com.tinkerforge.IPConnection"); % Create IP connection
     lcd = java_new("com.tinkerforge.BrickletLCD16x2", UID, ipcon); % Create device object

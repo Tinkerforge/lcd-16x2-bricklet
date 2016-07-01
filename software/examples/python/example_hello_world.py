@@ -3,7 +3,7 @@
 
 HOST = "localhost"
 PORT = 4223
-UID = "XYZ" # Change to your UID
+UID = "XYZ" # Change XYZ to the UID of your LCD 16x2 Bricklet
 
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_lcd_16x2 import BrickletLCD16x2

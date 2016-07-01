@@ -5,7 +5,7 @@ class Example
 {
 	private static string HOST = "localhost";
 	private static int PORT = 4223;
-	private static string UID = "XYZ"; // Change to your UID
+	private static string UID = "XYZ"; // Change XYZ to the UID of your LCD 16x2 Bricklet
 
 	// Callback function for button pressed callback
 	static void ButtonPressedCB(BrickletLCD16x2 sender, byte button)

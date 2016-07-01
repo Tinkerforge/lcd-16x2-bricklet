@@ -4,7 +4,7 @@ Imports Tinkerforge
 Module ExampleButtonCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your LCD 16x2 Bricklet
 
     ' Callback subroutine for button pressed callback
     Sub ButtonPressedCB(ByVal sender As BrickletLCD16x2, ByVal button As Byte)

@@ -6,7 +6,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "XYZ" // Change to your UID
+#define UID "XYZ" // Change XYZ to the UID of your LCD 16x2 Bricklet
 
 // Maps a wchar_t string to the LCD charset
 static void wchar_to_ks0066u(const wchar_t *wchar, char *ks0066u, int ks0066u_length)

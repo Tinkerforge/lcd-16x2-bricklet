@@ -5,7 +5,7 @@ class Example
 {
 	private static string HOST = "localhost";
 	private static int PORT = 4223;
-	private static string UID = "XYZ"; // Change to your UID
+	private static string UID = "XYZ"; // Change XYZ to the UID of your LCD 16x2 Bricklet
 
 	// Maps a normal UTF-16 encoded string to the LCD charset
 	static string UTF16ToKS0066U(string utf16)

@@ -1,7 +1,7 @@
 #!/bin/sh
 # Connects to localhost:4223 by default, use --host and --port to change this
 
-uid=XYZ # Change to your UID
+uid=XYZ # Change XYZ to the UID of your LCD 16x2 Bricklet
 
 # Handle incoming button pressed callbacks
 tinkerforge dispatch lcd-16x2-bricklet $uid button-pressed &
