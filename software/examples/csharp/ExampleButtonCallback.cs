@@ -28,10 +28,10 @@ class Example
 		// Don't use device before ipcon is connected
 
 		// Register button pressed callback to function ButtonPressedCB
-		lcd.ButtonPressed += ButtonPressedCB;
+		lcd.ButtonPressedCallback += ButtonPressedCB;
 
 		// Register button released callback to function ButtonReleasedCB
-		lcd.ButtonReleased += ButtonReleasedCB;
+		lcd.ButtonReleasedCallback += ButtonReleasedCB;
 
 		Console.WriteLine("Press enter to exit");
 		Console.ReadLine();
