@@ -13,12 +13,12 @@ ipcon@Connect[host,port]
 (*Callback function for button pressed callback*)
 ButtonPressedCB[sender_,button_]:=
  Print["Button Pressed: "<>ToString[button]]
-AddEventHandler[lcd@ButtonPressed,ButtonPressedCB]
+AddEventHandler[lcd@ButtonPressedCallback,ButtonPressedCB]
 
 (*Callback function for button released callback*)
 ButtonReleasedCB[sender_,button_]:=
  Print["Button Released: "<>ToString[button]]
-AddEventHandler[lcd@ButtonReleased,ButtonReleasedCB]
+AddEventHandler[lcd@ButtonReleasedCallback,ButtonReleasedCB]
 
 Input["Click OK to exit"]
 

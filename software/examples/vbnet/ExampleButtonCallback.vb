@@ -24,10 +24,10 @@ Module ExampleButtonCallback
         ' Don't use device before ipcon is connected
 
         ' Register button pressed callback to subroutine ButtonPressedCB
-        AddHandler lcd.ButtonPressed, AddressOf ButtonPressedCB
+        AddHandler lcd.ButtonPressedCallback, AddressOf ButtonPressedCB
 
         ' Register button released callback to subroutine ButtonReleasedCB
-        AddHandler lcd.ButtonReleased, AddressOf ButtonReleasedCB
+        AddHandler lcd.ButtonReleasedCallback, AddressOf ButtonReleasedCB
 
         Console.WriteLine("Press key to exit")
         Console.ReadLine()
