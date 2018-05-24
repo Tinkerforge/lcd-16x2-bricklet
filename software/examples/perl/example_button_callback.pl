@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
+use strict;
 use Tinkerforge::IPConnection;
 use Tinkerforge::BrickletLCD16x2;
 
