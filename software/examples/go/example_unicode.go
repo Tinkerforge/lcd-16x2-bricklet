@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-"tinkerforge/ipconnection"
-    "tinkerforge/lcd_16x2_bricklet"
+    "github.com/tinkerforge/go-api-bindings/ipconnection"
+    "github.com/tinkerforge/go-api-bindings/lcd_16x2_bricklet"
 )
 
 
