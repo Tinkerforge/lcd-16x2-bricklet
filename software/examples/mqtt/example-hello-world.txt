@@ -3,5 +3,6 @@
 setup:
 	# Turn backlight on
 	publish '' to tinkerforge/request/lcd_16x2_bricklet/XYZ/backlight_on 
+	
 	# Write "Hello World"
 	publish '{"line": 0, "position": 0, "text": "Hello World"}' to tinkerforge/request/lcd_16x2_bricklet/XYZ/write_line 
