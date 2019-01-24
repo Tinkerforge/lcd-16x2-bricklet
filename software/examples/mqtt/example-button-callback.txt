@@ -1,0 +1,11 @@
+
+
+# Change XYZ to the UID of your LCD 16x2 Bricklet
+
+setup:
+	# Handle incoming button pressed callbacks
+	subscribe to tinkerforge/callback/lcd_16x2_bricklet/XYZ/button_pressed
+	publish '{"register": true}' to tinkerforge/register/lcd_16x2_bricklet/XYZ/button_pressed # Register button_pressed callback
+	# Handle incoming button released callbacks
+	subscribe to tinkerforge/callback/lcd_16x2_bricklet/XYZ/button_released
+	publish '{"register": true}' to tinkerforge/register/lcd_16x2_bricklet/XYZ/button_released # Register button_released callback
