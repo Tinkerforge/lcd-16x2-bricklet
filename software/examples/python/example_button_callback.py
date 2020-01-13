@@ -29,5 +29,5 @@ if __name__ == "__main__":
     # Register button released callback to function cb_button_released
     lcd.register_callback(lcd.CALLBACK_BUTTON_RELEASED, cb_button_released)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
