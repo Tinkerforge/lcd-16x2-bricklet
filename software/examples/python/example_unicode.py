@@ -111,5 +111,5 @@ if __name__ == "__main__":
     # Write a string directly including characters from the LCD charset
     lcd.write_line(1, 0, b'Drehzahl: 1000s\xe9')
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
