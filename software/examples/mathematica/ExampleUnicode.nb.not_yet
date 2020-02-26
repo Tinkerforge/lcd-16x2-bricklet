@@ -12,71 +12,71 @@ WindowFrame->Normal*)
 (* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[{
- RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}], "\[IndentingNewLine]", 
- RowBox[{"LoadNETAssembly", "[", 
-  RowBox[{"\"\<Tinkerforge\>\"", ",", 
+ RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}], "\[IndentingNewLine]",
+ RowBox[{"LoadNETAssembly", "[",
+  RowBox[{"\"\<Tinkerforge\>\"", ",",
    RowBox[{
-    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}], 
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}],
   "]"}]}], "Input",
- CellChangeTimes->{{3.600175052949191*^9, 3.600175066601799*^9}, 
+ CellChangeTimes->{{3.600175052949191*^9, 3.600175066601799*^9},
    3.600175102142559*^9, {3.6001753172765293`*^9, 3.600175317946432*^9}, {
-   3.600500538026902*^9, 3.600500561851948*^9}, {3.600506097634747*^9, 
-   3.600506099012146*^9}, 3.600506136278721*^9, {3.60060805238198*^9, 
+   3.600500538026902*^9, 3.600500561851948*^9}, {3.600506097634747*^9,
+   3.600506099012146*^9}, 3.600506136278721*^9, {3.60060805238198*^9,
    3.600608117803465*^9}, 3.600685373189396*^9}],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"UTF16ToKS0066U", "[", "utf16_", "]"}], ":=", "\[IndentingNewLine]", 
-  RowBox[{"Module", "[", 
+  RowBox[{"UTF16ToKS0066U", "[", "utf16_", "]"}], ":=", "\[IndentingNewLine]",
+  RowBox[{"Module", "[",
    RowBox[{
-    RowBox[{"{", 
-     RowBox[{"ks006u", "=", 
-      RowBox[{"{", "}"}]}], "}"}], ","}], "\[IndentingNewLine]", 
+    RowBox[{"{",
+     RowBox[{"ks006u", "=",
+      RowBox[{"{", "}"}]}], "}"}], ","}], "\[IndentingNewLine]",
    "\[IndentingNewLine]", "]"}]}]], "Input",
  CellChangeTimes->{{3.600756640760085*^9, 3.600756685708035*^9}, {
-  3.600756731355142*^9, 3.600756734987237*^9}, {3.6007567683638678`*^9, 
+  3.600756731355142*^9, 3.600756734987237*^9}, {3.6007567683638678`*^9,
   3.600756788045496*^9}}],
 
 Cell[BoxData[{
- RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
- RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]",
+ RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]",
  RowBox[{
-  RowBox[{"uid", "=", "\"\<SCD32\>\""}], 
-  RowBox[{"(*", " ", 
-   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+  RowBox[{"uid", "=", "\"\<XYZ\>\""}],
+  RowBox[{"(*",
+   RowBox[{"Change XYZ to the UID of your LCD 16x2 Bricklet, "*)"}],
+  "\[IndentingNewLine]", "\[IndentingNewLine]",
+  RowBox[{"(*", " ",
    RowBox[{
-   "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
-   " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{"ipcon", "=", 
-  RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
- RowBox[{"lcd", "=", 
-  RowBox[{"NETNew", "[", 
-   RowBox[{"\"\<Tinkerforge.BrickletLCD16x4\>\"", ",", "uid", ",", "ipcon"}], 
-   "]"}]}], "\[IndentingNewLine]", 
+   "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}],
+   " ", "*)"}]}], "\[IndentingNewLine]",
+ RowBox[{"ipcon", "=",
+  RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n",
+ RowBox[{"lcd", "=",
+  RowBox[{"NETNew", "[",
+   RowBox[{"\"\<Tinkerforge.BrickletLCD16x4\>\"", ",", "uid", ",", "ipcon"}],
+   "]"}]}], "\[IndentingNewLine]",
  RowBox[{
-  RowBox[{"ipcon", "@", 
-   RowBox[{"Connect", "[", 
-    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\n", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Turn", " ", "backlight", " ", "on"}], " ", "*)"}]}], "\n", 
+  RowBox[{"ipcon", "@",
+   RowBox[{"Connect", "[",
+    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\n",
+  RowBox[{"(*", " ",
+   RowBox[{"Turn", " ", "backlight", " ", "on"}], " ", "*)"}]}], "\n",
  RowBox[{
-  RowBox[{"lcd", "@", 
-   RowBox[{"BacklightOn", "[", "]"}]}], "\n", "\n", " ", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Write", " ", "\"\<Hello World\>\""}], " ", 
-   "*)"}]}], "\[IndentingNewLine]", 
+  RowBox[{"lcd", "@",
+   RowBox[{"BacklightOn", "[", "]"}]}], "\n", "\n", " ",
+  RowBox[{"(*", " ",
+   RowBox[{"Write", " ", "\"\<Hello World\>\""}], " ",
+   "*)"}]}], "\[IndentingNewLine]",
  RowBox[{
-  RowBox[{"lcd", "@", 
-   RowBox[{"WriteLine", "[", 
-    RowBox[{"0", ",", "0", ",", "\"\<Hello World\>\""}], "]"}]}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{"ipcon", "@", 
-  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"ReleaseNETObject", "[", "lcd", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"lcd", "@",
+   RowBox[{"WriteLine", "[",
+    RowBox[{"0", ",", "0", ",", "\"\<Hello World\>\""}], "]"}]}],
+  "\[IndentingNewLine]", "\[IndentingNewLine]",
+  RowBox[{"(*", " ",
+   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]",
+ RowBox[{"ipcon", "@",
+  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]",
+ RowBox[{"ReleaseNETObject", "[", "lcd", "]"}], "\[IndentingNewLine]",
  RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
  CellChangeTimes->CompressedData["
 1:eJwdzVsog3EYBvAvyTluHJayECkzsXGzxLQLLgy5GEVNc/oyZtHiwty4Q2Mj
@@ -93,14 +93,14 @@ qBJdgw4etXVSk5e/zqFjxuuH4Q+Z7ololQsnIHNcPPhMDPWXUP8BqqsOGQ==
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToCharacterCode", "[", 
+ RowBox[{"ToCharacterCode", "[",
   RowBox[{"\"\<\[Micro]\>\"", ",", "\"\<Unicode\>\""}], "]"}]], "Input",
  CellChangeTimes->{{3.600755935875264*^9, 3.600755952778866*^9}, {
   3.6007565997407217`*^9, 3.600756606222394*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", "181", "}"}]], "Output",
- CellChangeTimes->{{3.600755945802114*^9, 3.600755953892013*^9}, 
+ CellChangeTimes->{{3.600755945802114*^9, 3.600755953892013*^9},
    3.600756606652405*^9}]
 }, Open  ]]
 },
