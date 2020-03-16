@@ -2,8 +2,8 @@
 
 setup:
 	# Turn backlight on
-	publish '' to tinkerforge/request/lcd_16x2_bricklet/XYZ/backlight_on 
-	
+	publish '' to tinkerforge/request/lcd_16x2_bricklet/XYZ/backlight_on
+
 	function UTF8ToKS006U # This function should convert strings from UTF-8 to the LCD charset. See examples for other languages.
 	
 	# Write a string using the FIXME function to map to the LCD charset
