@@ -14,10 +14,10 @@ fn main() -> Result<(), Box<dyn Error>> {
                                           // Don't use device before ipcon is connected.
 
     // Turn backlight on
-    lcd.backlight_on();
+    lcd.backlight_on().recv()?;
 
     // Write "Hello World"
-    lcd.write_line(0, 0, "Hello World".to_string());
+    lcd.write_line(0, 0, "Hello World".to_string()).recv()?;
 
     println!("Press enter to exit.");
     let mut _input = String::new();
