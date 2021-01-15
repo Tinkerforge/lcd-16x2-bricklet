@@ -15,8 +15,8 @@ def unicode_to_ks0066u(string):
         byte = lambda x: chr(x)
         ks0066u = ''
 
-        if not isinstance(string, unicode):
-            code_points = unicode(string, 'UTF-8')
+        if not isinstance(string, unicode): # pylint: disable=undefined-variable
+            code_points = unicode(string, 'UTF-8') # pylint: disable=undefined-variable
         else:
             code_points = string
     else:
