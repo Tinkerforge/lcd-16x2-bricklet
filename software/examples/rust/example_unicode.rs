@@ -16,10 +16,10 @@ fn utf8_to_ks0066u(utf8: &str) -> String {
             // The LCD charset doesn't include '\' and '~', use similar characters instead
             0x005c => 0xa4, // REVERSE SOLIDUS maps to IDEOGRAPHIC COMMA
             0x007e => 0x2d, // TILDE maps to HYPHEN-MINUS
-            0x0020...0x007e => code_point as u32,
+            0x0020..=0x007d => code_point as u32,
 
             // Katakana subset from JIS X 0201
-            0xff61...0xff9f => code_point as u32 - 0xfec0,
+            0xff61..=0xff9f => code_point as u32 - 0xfec0,
 
             // Special characters
             0x00a5 => 0x5c, // YEN SIGN
